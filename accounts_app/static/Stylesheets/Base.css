@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,600');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+body
+{
+  font-family: 'Raleway', sans-serif;
+  margin: 0;
+}
+.Container
+{
+  font-size: 100%;
+  position: relative;
+  width: 100%;
+}
+  header.Navigation
+  {
+    position: relative;
+    width: 100%;
+    height: 75px;         /* Initializing the size based on what the user sees (excluding scroll)*/
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    background-image: url("../Images/Textures/backgroundtexture.png");
+  }
+    .Logo
+    {
+		width: 250px;
+		height: 40px;
+		display: inline-block;
+
+		position: relative;
+		top: 50%;
+		transform:translateY(-60%);
+		left: 5vw;
+
+		background-image: url("../Images/Logo/logo.png");
+		background-size: 250px 40px;
+		background-position: center;
+
+		cursor: pointer;
+    }
+    ul.Nav-Links
+    {
+        position: absolute;
+        width: 45%;
+        height: 85%;
+        left: 25vw;
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        font-size: 110%;
+        text-align: center;
+        text-transform: uppercase;
+    }
+      ul.Nav-Links li
+      {
+		line-height: 75px;
+        position: relative;
+        display: inline-block;
+        margin-right: 5%;
+        width: 60px;
+      }
+        ul.Nav-Links li > a
+        {
+          text-decoration: none;
+          color: #727272;
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 14px;
+        }
+        ul.Nav-Links li > a::after
+        {
+          content: '';
+          display: block;
+          width: 0;
+          height: 2px;
+          background: #0E2B5B;
+          transition: width .3s;
+          margin-top: -2.5vh;
+        }
+        ul.Nav-Links li > a:hover::after
+        {
+          width: 100%;
+          transition: width .3s;
+        }
+          ul.Nav-Links a.Active
+          {
+          color: #0E2B5B;
+          font-weight: bold;
+          }
+            ul.Nav-Links li > a:hover
+            {
+              color: #4B6083;
+              font-weight: bold;
+              font-size: 90%;
+              transition: .25s;
+            }
+
+      .Search-Wrapper
+      {
+        display: inline-block;
+        width: 15%;
+        min-width: 185px;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+		transform:translateY(-50%);
+      }
+        .Search-Wrapper input[type="text"].Search-Bar
+        {
+          width: 85%;
+          height: 32px;
+          float: left;
+          border: 1px solid lightgrey;
+          border-right-width: 0px;
+          padding: 5px;
+          border-radius: 1px;
+          outline: none;
+          color: black;
+        }
+          .Search-Bar:focus
+            {
+              background-color: white;
+            }
+        .Search-Wrapper button.Search-Button
+        {
+          width: 15%;
+          background-color: white;
+          margin: 0;
+          border: 1px solid lightgrey;
+          height: 32px;
+          float: left;
+          border-left: 0px;
+          outline: none;
+          padding: 6px 10px;
+          font-size: 17px;
+          cursor: pointer;
+          overflow: hidden;
+        }
+          .fa-search
+          {
+            width: 100%;
+            height: 100%;
+          }
+        .Color-Bar
+        {
+          position: absolute;
+          bottom:0;
+          z-index: 3;
+          width: 100%;
+          height: 1vh;
+          background-color: #0E2B5B;
+		  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+        }
+/*--------------------Body--------------------*/
+section.Main-Content
+{
+  width: 100%;
+  height: 88vh;
+  /*overflow: hidden;*/
+  position: relative;     /* For 'about' */
+  padding: 0;
+  overflow: hidden;
+}
+.Banner-Wrapper
+{
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  width: 100%;
+  height: 10%;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+.Banner-Background  /* Height based on viewport */
+{
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: none;
+    padding: 0;
+    background: #0E2B5B url('../Images/Background/football.jpg');
+    background-size: cover;
+    background-position-y: center;
+    -webkit-box-shadow: 0px 1px 9px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 1px 9px 0px rgba(0,0,0,0.4);
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.4);
+    vertical-align: middle;
+}
+
+.Banner-Background::before
+{
+    background-color: #0E2B5B;
+    opacity: .64;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.Banner-Text
+{
+  position: absolute;
+  top: 75%;
+  margin: 0;
+  color: white;
+  font-size: 38px;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  line-height: 100%;
+  text-transform: uppercase;
+  transform: translateY(-50%);
+}
+
+/*--------------------Footer--------------------*/
+footer
+{
+  font-size: 100%;
+  width: 100%;
+  white-space: nowrap;
+}
+  .Bottom-Banner
+  {
+	height: 6vh;
+    width: 100%;
+    background-color: black;
+    text-align: center;
+    overflow: hidden;
+  }
+    .Bottom-Banner > p
+    {
+      color: white;
+      display: inline;
+      text-transform: uppercase;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 12px;
+      line-height: 6vh;
+      margin: 0;
+    }
+    .Bottom-Banner > p > span
+    {
+
+      text-transform: lowercase;
+      font-size: 80%;
+
+    }
+    .Bottom-Banner > p:not(:nth-child(3))
+    {
+      margin-right: 5%;
+    }
+    ul#contact-icons
+    {
+      list-style-type: none;
+      display:inline-block;
+      padding: 0;
+      border-radius: 50%;
+      margin: 0;
+      transform: translateY(25%);
+
+    }
+      ul#contact-icons > div
+      {
+        cursor: pointer;
+      }
+
+      .Bottom-Banner ul#contact-icons .Crop-Circle
+      {
+        display:inline-block;
+        width: 22px;
+        height: 22px;
+        border-radius: 100%;
+        background-size: cover;
+
+      }
+        #facebook { background-image: url("../Images/Social-Media/facebook.png"); }
+        #twitter { background-image: url("../Images/Social-Media/twitter.png"); }
+        #linkedin { background-image: url("../Images/Social-Media/linkedin.png"); }
+        #googleplus { background-image: url("../Images/Social-Media/google-plus.png"); }
+        #youtube { background-image: url("../Images/Social-Media/youtube.png"); }

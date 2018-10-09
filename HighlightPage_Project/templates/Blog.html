@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+	{% block head %}
+    <link type="text/css" rel="stylesheet" href="{% static 'Stylesheets/Blog.css'%}">
+    <link type="text/css" rel="stylesheet" href="{% static 'Stylesheets/Base.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	{% endblock %}
+
+
+	{% block main %}
+    <section class="Container">
+        <section class="Main-Content">
+          <div class="Banner-Wrapper">
+            <div class="Banner-Background"></div>
+            <h3 class="Banner-Text">Blog</h3>
+          </div>
+          	<ul class="Tiles">
+				{% for post in post_objects %}
+					<li class="Tile">
+		              <!--<img src="{{ post.thumbnail.url }}"/>-->
+					  <img src="{% static 'Images/Thumbnails/all-sports.jpg'%}"/>
+		              <p class="Tile-Date">{{ post.timestamp }}</p>
+		              <h3 class="Tile-Title">{{ post.title }}</h3>
+		              <p class="Tile-Read-More"><a href="#">READ MORE</a></p>
+					</li>
+				{% endfor %}
+			</ul>
+          <div class="Button-Wrapper">
+            <button type="button" value="prev_page" class="Directional-Button">P</button>
+          	<button type="button" class="Number-Button Active">1</button>
+          	<button type="button" class="Number-Button">2</button>
+          	<button type="button" class="Number-Button">3</button>
+          	<button type="button" class="Number-Button">4</button>
+            <button type="button" value="next_page" class="Directional-Button">N</button>
+          </div>
+        </section>
+    </section>
+	{% endblock %}

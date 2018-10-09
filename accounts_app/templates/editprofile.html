@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+	{% block head %}
+	<link type="text/css" rel="stylesheet" href="{% static 'user_handler_app/Stylesheets/Base.css' %}"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link type="text/css" rel="stylesheet" href="{% static 'user_handler_app/Stylesheets/Profile.css' %}"/>
+	{% endblock %}
+
+	{% block main %}
+	<section class="Container">
+		<section class="Main-Content">
+			<form id="post_form" method="post" >
+			    {% csrf_token %}
+				{{ form.as_p }}
+
+			    <input type="submit" name="submit" value="Submit" />
+			</form>
+		</section>
+	</section>
+	{% endblock %}
+
+	{% block scripts %}
+	{% endblock %}

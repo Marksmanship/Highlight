@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	{% block head %}
+	{% endblock %}
+	</head>
+	<body>
+		<header class="Navigation">
+			<div class="Logo" onclick="location.href='{% url 'Base_Home_View'%}'"></div>
+			<ul class="Nav-Links">
+				<li><a href="{% url 'Base_Home_View' %}" class="Active">Home</a></li>
+				<li><a href="{% url 'Base_About_View' %}">About</a></li>
+				<li><a href="{% url 'Base_Sports_View' %}">Sports</a></li>
+				<li><a href="{% url 'Posts_Namespace:Posts_List' %}">Blog</a></li>
+			</ul>
+			<div class="Search-Wrapper">
+				<input type="text" class="Search-Bar" placeholder="Search">
+				<button type="submit" class="Search-Button">
+					<i class="fa fa-search"></i>
+				</button>
+			</div>
+			<div class="Color-Bar"></div>
+		</header>
+		{% block main %}
+		{% endblock %}
+		<footer>
+			<div class="Bottom-Banner">
+				<p>#169 2017 All Rights Reserved Terms of Use and Privacy Policy</p>
+				<p>CONTACT US <span>placeholderemail@highlightpage.com</span></p>
+				<p>FOLLOW US</p>
+				<ul id="contact-icons">
+					<div id="facebook" class="Crop-Circle" onclick="location.href='#'"></div>
+					<div id="twitter" class="Crop-Circle" onclick="location.href='#'"></div>
+					<div id="linkedin" class="Crop-Circle" onclick="location.href='#'"></div>
+					<div id="googleplus" class="Crop-Circle" onclick="location.href='#'"></div>
+					<div id="youtube" class="Crop-Circle" onclick="location.href='#'"></div>
+				</ul>
+			</div>
+		</footer>
+		{% block scripts %}
+		{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,153 @@
+p#myParagraph
+		{
+			position: absolute;
+			width: 450px;
+			top: 32.5vh;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+			text-align: center;
+
+			font-family: 'Roboto', sans-serif;
+			font-size: 14px;
+			color: white;
+		}
+
+
+		html,body
+		{
+	  		background-color: #000;
+	  		width: 100%;
+	  		height: 100%;
+		}
+		img.background-image
+		{
+			width: 100%;
+			height: 100%;
+			-webkit-filter: blur(10px);
+			-moz-filter: blur(10px);
+			-o-filter: blur(10px);
+			-ms-filter: blur(10px);
+			filter: blur(10px);
+			opacity: .3;
+		}
+		img.logo
+		{
+			position: absolute;
+			top: 0;
+			height: 60px;
+			width: 25%;
+			z-index: 3;
+			text-align: center;
+			right: 50%;
+			transform: translateX(50%);
+			top: 20vh;
+		}
+		.holder
+		{
+			position: absolute;
+			z-index: 3;
+			top: 42.5vh;
+		  left: 50vw;
+		  transform: translateX(-50%);	/* The left-most side is centered, but with this, the entire element is too */
+			width: 100%;
+			height: 150px;
+			background-color: black;
+			opacity: .6;
+			-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+			-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+			box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+		}
+			.mock-border
+			{
+				width: 100%;
+				height: 13.33%; /* 20px */
+				background-color: #0E2B5B;
+				border: 1px solid black;
+			    border-width: 1px 0;
+			}
+		.subscription-container
+		{
+			position: absolute;
+			width: 100%;
+			z-index: 4;
+			top: 63.5vh;
+			left: 50vw;
+			transform:translateX(-50%);
+		}
+			.subscription-background
+			{
+				position: relative;
+				top: -1px;
+				width: 30%;
+				margin: 0 auto;
+				height: 40px;
+				background-color: black;
+				opacity: .6;
+			}
+			.subscription-container form
+			{
+				position: relative;
+				width: 100%;
+				height: 37px;
+			}
+				.subscription-container form > input [type="email"]
+				{
+					position: relative;
+					left: 5vw;
+					display: block;
+					margin-bottom: 25px;
+					width: 28% !important;
+					border: 2px solid #0E2B5B;
+					border-radius: 3px;
+				}
+				.subscription-container form > input [type="submit"]
+				{
+					width: 25%;
+				}
+				.subscription-container form > input:focus
+				{
+					background-color: #faf6d9;
+				}
+		ul#countdown
+		{
+		  display: flex;
+    	  align-items: center;
+		  position: absolute;
+		  z-index: 3;
+		  top: 43.3%;
+		  transform: translateY(-50%);
+		  left: 50%;
+		  transform: translateX(-50%);
+		  width: 50%;
+		  height: 150px;
+		  margin: 0 auto;
+		  padding: 0;
+		  color: white;
+		  border: 1px solid #002846;
+		  border-width: 0 0;
+		  overflow: hidden;
+		  font-family: 'Arial Narrow', Arial, sans-serif;
+		  font-weight: bold;
+		}
+		  li
+		  {
+		    margin: 0 -3px 0 0;
+		    padding: 0;
+		    display: inline-block;
+		    width: 25%;
+		    font-size: 4vw;
+		    text-align: center;
+		   }
+		    .label
+		    {
+		      color: #adafb2;
+		      font-size: 1.5vw;
+		      text-transform: uppercase;
+		      font-family: 'Open Sans', sans-serif;
+		    }
+		    .number{
+		    	text-shadow: 3px 2px 2px rgba(0, 0, 0, 0.92);
+		    	font-family: 'Graduate', cursive;
+		    }

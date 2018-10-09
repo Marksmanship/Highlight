@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+	{% block head %}
+	<link type="text/css" rel="stylesheet" href="{% static 'Stylesheets/Base.css' %}"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link type="text/css" rel="stylesheet" href="{% static 'Stylesheets/Profile.css' %}"/>
+	{% endblock %}
+
+	{% block main %}
+	<section class="Container">
+		<section class="Main-Content">
+			<div class="Profile-Container">
+				
+				<img class="Avatar" src="{{ user.userprofile.avatar.url }}"/>
+
+				<img class="Banner" src="{{ user.userprofile.banner.url }}"/>
+
+				<div class="Stats"></div>
+				<div class="Gallery"></div>;
+				<p><span style="font-size: 18px; font-weight: bold; color: #24292e;">{{ user.first_name }} {{ user.last_name }}</span></p>
+			</div>
+		</section>
+	</section>
+	{% endblock %}
+
+	{% block scripts %}
+	{% endblock %}

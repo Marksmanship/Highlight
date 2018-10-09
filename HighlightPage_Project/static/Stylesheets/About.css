@@ -1,0 +1,323 @@
+
+*
+{
+    box-sizing: border-box;
+}
+body
+{
+
+  font-size: 15px;
+  font-weight: 100;
+  color: white;
+  margin: 0;
+  height: 100%;
+
+}
+
+
+/*--------------------Header--------------------*/
+.Nav-Links .Active
+{
+  color: #00467b;
+  font-weight: bold;
+}
+/*--------------------Body--------------------*/
+
+
+.Carousel-Container
+{
+  position: relative;
+  width: 100%;
+  height: 90%;
+  background: grey;
+
+
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.Carousel-Container form /* Container for all content, but particularlly targets the *wrapper* of radioboxes */
+{
+  box-sizing: border-box;
+  text-align: center;
+  padding: 22px;
+  position: absolute;
+  height: 100%;
+
+ /* Display the flex column inline */
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+ /* Align the radioboxes in column fashion */
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  /* Vertically center the radioboxes within the column */
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.Carousel-Container form input /* Each radiobox */
+{
+  height: 0px;      /* Hiding default cirlces. Create them later */
+  width: 0px;
+  margin: 12px 0;   /* Distance between each circle */
+  z-index: 1;
+}
+
+.Carousel-Container form input:checked /* Selected radioboxes */
+{
+  outline: 0;
+  border: 0;
+}
+
+.Carousel-Container form input:before /* Creating custom boxes */
+{
+  content: "";
+  position: absolute;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.81);
+  border-radius: 11px;
+  cursor: pointer;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+}
+
+.Carousel-Container form input:checked:before /* Handling checked custom boxes */
+{
+  background-color: #fff;
+}
+
+.Carousel-Container form input:after /* Inserting title next to radiobox */
+{
+  content: "" attr(title) "";
+  position: relative;
+  left: 30px;
+  opacity: 1;
+  color: white;
+  font-size: 9px;
+  display: block;
+  min-width: 80px;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
+}
+
+
+.Carousel-Container form input:checked:after /* Animation of title once radiobox is checked */
+{
+  left: 20px;
+}
+
+/* To have buttons trigger the change, we must exclude the code below */
+.Carousel-Container form input:nth-of-type(1):checked ~ .Slides-Container label
+{
+  -webkit-transform: translateX(-0%);
+  transform: translateY(-0%);
+}
+
+.Carousel-Container form input:nth-of-type(2):checked ~ .Slides-Container label
+{
+  -webkit-transform: translateX(-100%);
+  transform: translateY(-100%);
+}
+
+.Carousel-Container form input:nth-of-type(3):checked ~ .Slides-Container label
+{
+  -webkit-transform: translateX(-200%);
+  transform: translateY(-200%);
+}
+
+.Carousel-Container form .Slides-Container /* The page content container */
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.Carousel-Container form .Slides-Container label /* Labels are the actual page content associated with each radiobox */
+{
+  min-width: 100vw;
+  min-height: 100%;
+  overflow: hidden;
+
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+
+
+  background-color: #444;
+  z-index: 0;
+  -webkit-transition: all 0.75s cubic-bezier(0.75, 0.25, 0, 1.05);
+  transition: all 0.75s cubic-bezier(0.75, 0.25, 0, 1.05);
+}
+
+label#Slide-1-Label > .content
+{
+  width: 100%;
+
+  box-sizing: border-box;
+  padding: 0 110px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  font-size: 18px;
+  overflow:hidden;
+}
+#Slide-1-Label p
+{
+  color: white;
+  width: 50%;
+  margin-bottom: 10px;
+  margin: -5% 25px 25px 25px;
+}
+
+#Slide-1-Label > div > div
+{
+  background-image: url("../Images/Background/soccer.jpg");
+  background-size: cover;
+  background-position: 50% 25%;
+  margin: 25px;
+  width: 50%;
+  height: 25vh;
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.56);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.56);
+  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.56);
+}
+
+
+/*--------------------Footer--------------------*/
+
+/*--------------------Cards--------------------*/
+label#Slide-2-Label > .content
+{
+  box-sizing: border-box;
+  width: 794px; /* accounting for inline-block whitespace */
+  height: 300px;
+  margin: 0 auto;
+  padding: 0 110px;
+  font-size: 18px;
+  overflow: hidden;
+  text-overflow: clip;
+  box-sizing: content-box;
+  text-align: center;
+  white-space: nowrap;
+  position: relative;
+
+}
+.Team-Carousel
+{
+  width: 860px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.Card-Figure
+{
+  margin: 0;
+  width: 100%;
+  display: inline-block;
+  transition: 1000ms;
+}
+.Card
+{
+  min-height: 300px;
+  min-width: 175px;
+  max-width: 175px;
+  overflow: hidden;
+  margin: 0 20px 0 20px;
+  text-align: left;
+  display: inline-block;
+  transition: 1000ms;
+}
+
+.Card > .Headshot
+{
+  height: 200px;
+  width: 100%;
+  position: relative;
+  background-position: center;
+  background-image: url("https://media.gq.com/photos/57294848ac40e82f45630ef2/3:2/w_880/BrowserPreview_tmp.jpg");
+  background-size: cover;
+}
+.Card:nth-of-type(2n) > div.Headshot
+{
+  background-image: url("https://www.washingtonpost.com/resizer/7peudAkWpXLg1pyLI87u9Quh874=/480x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/J2FLGGSJOQ5CRLO5A36XXOWE7A.jpg");
+}
+
+.Card > h5
+{
+  margin-bottom: 0;
+  margin-top: 10px;
+  text-transform: uppercase;
+
+}
+.Card > h6
+{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.Card > p
+{
+  font-size: 11px;
+  margin-top: 5px;
+  width: 90%;
+  white-space: normal;
+}
+.arrow
+{
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  margin-top: -65px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+#left-arrow
+{
+  border-width: 30px 40px 30px 0;
+  left: 0;
+  margin-left: 30px;
+  border-color: transparent #fff transparent transparent;
+}
+#right-arrow
+{
+  border-width: 30px 0px 30px 40px;
+  right: 0;
+  marging-right: 30px;
+  border-color: transparent transparent transparent #fff;
+}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+	{% block head %}
+	<link rel="stylesheet" type="text/css" href="{% static 'Stylesheets/Home.css' %}"/>
+	<link type="text/css" rel="stylesheet" href="{% static 'Stylesheets/Base.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	{% endblock %}
+
+	{% block main %}
+	<section class="Container">
+		<section class="Main-Content">
+			<div class="Background-Image-Container"></div>
+			<div class="Banner-Quote-Wrapper">
+				<p class="Banner-Quote">Join the HIGHLIGHTPAGE family and get the</p>
+				<p class="Banner-Quote">exposure needed to earn an atheletic scholarship.</p>
+			</div>
+			<div class="Credentials">
+				<div class="Register-Screen-Wrapper"></div>
+				<div class="Button-Wrapper">
+					<button onclick="showPanel(0,'#509b65')">Sign Up</button>
+					<button onclick="showPanel(1,'#1B59A5')">Log In</button>
+				</div>
+				<div class="Form-Wrapper">
+					<div class="Tab-Panel" id="tab-1">
+						<p class="Registry-Quote">Your BIG opportunity may be right</p>
+						<p class="Registry-Quote">where you are now.</p>
+						<form class="Registry-Form" action="account/" method="POST">
+							{% csrf_token %}
+							<label for="registry-first-name" class="Form-Half">First Name*</label>
+							<label for="registry-last-name" class="Form-Half">Last Name*</label>
+								{{ form.first_name }}
+								{{ form.last_name }}
+							<label for="registry-username" class="Form-Half">Username*</label>
+							<label for="registry-occupation" class="Form-Half">Occupation*</label>
+								{{ form.username }}
+								{{ form.occupation }}
+							<label for="registry-email" class="Form-Half">Email*</label>
+								{{ form.email }}
+							<label for="registry-password1" class="Form-Half">Password*</label>
+							<label for="registry-password2" class="Form-Half">Confirm Password*</label>
+								{{ form.password1 }}
+								{{ form.password2 }}
+							<button type="submit" name="registry_submit" class="Form-Button" id="register-button">Register</button>
+						</form>
+					</div>
+					<div class="Tab-Panel" id="tab-2">
+						<form class="Login-Form" action="account/login/" method="post">
+							{% csrf_token %}
+							<h2 class="Login-Quote">Welcome Back!</h2>
+								<label class="Form-Full" for="login-username">Username*</span></label>
+									<input type="text" class="Form-Half" name="login-username" id="login-username">
+								<label class="Form-Full" for="login-password">Password*</label>
+									<input type='password' class="Form-Half" name="login-password" id="login-password" maxlength="16" placeholder='Please enter your password'>
+							<p class="Login-Forgot"><a href="#">Forgot your password?</a></p>
+							<button type="submit" name="login_submit" class="Form-Button" id="login-button">Login</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</section>
+	{% endblock %}
+	{% block scripts %}
+	<script type="text/javascript" src="{% static 'Scripts/Home.js' %}"></script>
+	{% endblock %}

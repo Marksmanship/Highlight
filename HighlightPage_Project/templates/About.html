@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+	{% block head %}
+  	<link type="text/css" rel="stylesheet" href="{% static 'Stylesheets/Base.css' %}">
+  	<link rel="stylesheet" type="text/css" href="{% static 'Stylesheets/About.css' %}">
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	{% endblock %}
+	{% block main %}
+    <section class="Container">
+    	<section class="Main-Content">
+        	<div class="Banner-Wrapper">
+          		<div class="Banner-Background"></div>
+          		<h3 class="Banner-Text">About</h3>
+        	</div>
+			<div class="Carousel-Container">
+			    <form>
+			      	<input type="radio" id="Slide-1-Button" class="Radio-Buttons" name="slider" title="Our Mission" autofocus="autofocus" checked="checked"/>
+			      	<input type="radio" id="Slide-2-Button" class="Radio-Buttons" name="slider" title="Meet The Team"/>
+			      	<div class="Slides-Container">
+	            		<label for="Slide-1-Button" id="Slide-1-Label" class="Slide" style="background-color: #07152d";>
+			          		<div class="content">
+			            		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					        	<div></div>
+			          		</div>
+	            		</label>
+			        	<label for="Slide-2-Button" id="Slide-2-Label" class="Slide">
+			          		<div class="content">
+			                    <div class="Team-Carousel">
+			                      	<div id="left-arrow" class="arrow"></div>
+				                          <div class="Card">
+				                            <div class="Headshot"></div>
+				                            <h5>John Doe</h5>
+				                            <h6>HTML Specialist</h6>
+				                            <p>John Doe is a html magician and he is just so amazing. no one can compete</p>
+				                          </div><div class="Card">
+				                            <div class="Headshot"></div>
+				                            <h5>John Doe</h5>
+				                            <h6>CSS Specialist</h6>
+				                            <p>John Doe is a html magician and he is just so amazing. no one can compete</p>
+				                          </div><div class="Card">
+				                            <div class="Headshot"></div>
+				                            <h5>John Doe</h5>
+				                            <h6>JavaScript Specialist</h6>
+				                            <p>John Doe is a html magician and he is just so amazing. no one can compete</p>
+				                          </div><div class="Card">
+				                            <div class="Headshot"></div>
+				                            <h5>John Doe</h5>
+				                            <h6>jQuery Specialist</h6>
+				                            <p>John Doe is a html magician and he is just so amazing. no one can compete</p>
+				                          </div><div class="Card">
+				                            <div class="Headshot"></div>
+				                            <h5>Bob Ross</h5>
+				                            <h6>Finger Specialist</h6>
+				                            <p>John Doe is a html magician and he is just so amazing. no one can compete</p>
+				                          </div><div class="Card">
+				                            <div class="Headshot"></div>
+				                            <h5>Bob Ross</h5>
+				                            <h6>Foot Specialist</h6>
+				                            <p>John Doe is a html magician and he is just so amazing. no one can compete</p>
+				                          </div><div class="Card">
+				                            <div class="Headshot"></div>
+				                            <h5>Bob Ross</h5>
+				                            <h6>Hair Specialist</h6>
+				                            <p>John Doe is a html magician and he is just so amazing. no one can compete</p>
+				                          </div><div class="Card">
+				                            <div class="Headshot"></div>
+				                            <h5>Bob Ross</h5>
+				                            <h6>Teeth Specialist</h6>
+				                            <p>John Doe is a html magician and he is just so amazing. no one can compete</p>
+				                          </div><div class="Card">
+				                            <div class="Headshot"></div>
+				                            <h5>Bob Ross</h5>
+				                            <h6>Finger Specialist</h6>
+				                            <p>John Doe is a html magician and he is just so amazing. no one can compete</p>
+				                          </div><div class="Card">
+				                            <div class="Headshot"></div>
+				                            <h5>Bob Ross</h5>
+				                            <h6>Foot Specialist</h6>
+				                            <p>John Doe is a html magician and he is just so amazing. no one can compete</p>
+				                          </div>
+			                      	<div id="right-arrow" class="arrow"></div>
+			                    </div>
+			                </div>
+			        	</label>
+			     	</form>
+  				</div>
+			</div>
+      </section>
+  </section>
+  {% endblock %}
+  {% block scripts %}
+  <script type="text/javascript" src="{% static 'Scripts/About.js' %}"></script>
+  {% endblock %}
