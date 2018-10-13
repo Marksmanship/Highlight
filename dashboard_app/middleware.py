@@ -62,10 +62,13 @@ class LoginRequriedMiddleware:
 
 		# If the user is already logged in and tries to access a page where you can't be logged in
 		if request.user.is_authenticated and url_is_exempt:
-			return redirect(settings.LOGIN_REDIRECT_URL) 	# Redirect a logged-in user
-		# Normal behavior: User is visiting non-exempt page, or no user logged in and page doesn't require login
-		elif request.user.is_authenticated or url_is_exempt:
-			return None		# Middleware doesn't have to do anything
-		# If the user is not logged in and the url doesn't require login
+			return None
+			# return redirect(settings.LOGIN_REDIRECT_URL) 	# Redirect a logged-in user
 		else:
-			return redirect('settings.LOGIN_URL')
+			return None
+		# # Normal behavior: User is visiting non-exempt page, or no user logged in and page doesn't require login
+		# elif request.user.is_authenticated or url_is_exempt:
+		# 	return None		# Middleware doesn't have to do anything
+		# # If the user is not logged in and the url doesn't require login
+		# else:
+		# 	return redirect('settings.LOGIN_URL')

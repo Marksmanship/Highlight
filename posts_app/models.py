@@ -14,7 +14,9 @@ class Post(models.Model):
 		self.image.delete(save=False)
 		self.image = DEFAULT-IMAGE
 		self.save()
-	def get_object_or_404(self):
+
+	def get_object_or_404(self): # Utilized by the view
 		return "/blog/%s" % (self.id)
+		
 	def __str__(self):
 		return self.title

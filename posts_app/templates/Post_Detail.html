@@ -2,11 +2,12 @@
 <html>
 
 	<body>
-		<h2>{{ instance.title }}</h2><br/>
-		{{ instance.context }}<br/>
-		{{ instance.timestamp }}<br/>
-		{{ instance.updated }}<br/>
-		{{ instance.id }}<br/>
+		<h2 style="margin: 0 auto;">{{ post_objects.title }}</h2><br/>
+		<p style="font-size: 20px"> This is the content of the blog post: {{ post_objects.content }}</p><br/>
+		<img src="{{ post_objects.thumbnail.url }}" style="margin: 10px auto 10px auto; display:block;"/>
+		{{ post_objects.timestamp }}<br/>
+		{{ post_objects.updated }}<br/>
+		{{ post_objects.id }}<br/>
 	</body>
 
 </html>

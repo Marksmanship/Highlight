@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm	# Django pre-populated form that accepts a meta model
-from django.contrib.auth import get_user_model			# Import our customized user model
+from django.contrib.auth import get_user_model							# Import our customized user model
 from .models import UserProfile
 
 # Declare our custom User model
@@ -29,7 +29,7 @@ class RegistrationForm(UserCreationForm):
 			'password1',
 			'password2'
 		]
-	# Reserved constructor
+	# Constructor for field data
 	def __init__(self, *args, **kwargs):
 		super(RegistrationForm, self).__init__(*args, **kwargs)
 		self.fields['first_name'].widget.attrs={ 'class': 'Form-Half', 'id': 'registry-first-name', 'placeholder': 'Enter first name'}
