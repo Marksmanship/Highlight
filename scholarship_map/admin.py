@@ -1,16 +1,16 @@
 from django.contrib import admin
 from .models import (
-	Schools,
-	Sports,
-	School_Sports,
-	User_Schools,
-	User_Sports,
-	Sport_Stats,
+	School,
+	Sport,
+	School_Sport,
+	User_School,
+	User_Sport,
+	Sport_Stat,
 )
 # Register your models here.
-admin.site.register(Schools)
-admin.site.register(Sports)
-admin.site.register(School_Sports)
-admin.site.register(User_Schools)
-admin.site.register(User_Sports)
-admin.site.register(Sport_Stats)
+admin.site.register(School)
+admin.site.register(Sport)
+admin.site.register(School_Sport)
+admin.site.register(User_School)
+admin.site.register(User_Sport)
+admin.site.register(Sport_Stat)
