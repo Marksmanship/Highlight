@@ -17,6 +17,7 @@ class School(models.Model):
         verbose_name_plural = 'Schools'
     def __str__(self):
         return '%s, %s' % (self.school_id, self.school_name)
+        
 # SPORTS:
 # -------
 class Sport(models.Model):
@@ -81,6 +82,7 @@ class User_School(models.Model):
         unique_together = ('student_id', 'student_school_id')
         verbose_name = "User_School"
         verbose_name_plural = "User_Schools"
+
 # USER-SPORTS: [Many-To-One with 'Users' (One user multiple sports) | Many-To-One with 'Sports' (One sport multiple users)]
 # ------------
 class User_Sport(models.Model):
@@ -95,6 +97,7 @@ class User_Sport(models.Model):
 
     def __str__(self):
         return '[%s] plays [%s]' % (self.student_id, self.sports_id)
+
 # SPORT STATS - USERS:
 # --------------------
 class Sport_Stat(models.Model):

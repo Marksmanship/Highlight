@@ -5,7 +5,7 @@ from .forms import RegistrationForm, ProfileEditForm
 
 def Register(request):
 	form_class = RegistrationForm
-	template_name = 'Home.html'
+	template_name = 'dashboard_app/Home.html'
 
 	# if request.method == 'POST':
 	# 	form = form_class(request.POST)
@@ -39,11 +39,12 @@ def Login(request):
 		return redirect('/')
 
 def Logout(request):
-	logout(request)
+	if request.method == 'POST':
+		logout(request)
 	return redirect('/')
 
 def ViewProfile(request):
-	return render(request, 'profile.html', {'user': request.user})
+	return render(request, 'accounts_app/profile.html', {'user': request.user})
 
 # Trying to display the image upload field on the EditProfile
 # and display the actual image on the Profile page
@@ -57,4 +58,4 @@ def EditProfile(request):
 	else:
 		form = ProfileEditForm(instance=request.user)
 		args = {'form': form}
-		return render(request, 'editprofile.html', {'form': form})
+		return render(request, 'accounts_app/editprofile.html', {'form': form})

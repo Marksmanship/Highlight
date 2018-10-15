@@ -17,7 +17,11 @@ LOGIN_URL = '/signup/'
 MEDIA_URL = '/media/'	# Shown in browser
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')	# Internal hierarchy
 ROOT_URLCONF = 'dashboard_app.urls'
+#STATIC_ROOT= os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'	# Shown in browser
+STATICFILES_DIRS = [
+	os.path.join(BASE_DIR, 'static'),
+]
 
 
 # Quick-start development settings - unsuitable for production
