@@ -7,22 +7,15 @@ def Register(request):
 	form_class = RegistrationForm
 	template_name = 'dashboard_app/Home.html'
 
-	# if request.method == 'POST':
-	# 	form = form_class(request.POST)
-	# 	if form.is_valid():
-	# 		form.save()
-	#
-	# 		username = form.cleaned_data['username']
-	# 		password = form.cleaned_data['password1']
-	# 		user = authenticate(username=username, password=password)
-	#
-	# 		if user is not None:
-	# 			if user.is_active:
-	# 		 		login(request, user)
-	# 		 		return redirect('profile/')
-	# else:
-	# 	form = form_class()
-	# 	return render(request, template_name, {'form': form})
+	if request.method == 'POST':
+		form = form_class(request.POST)
+		if form.is_valid():
+			form.save()
+
+			return redirect('profile/')
+	else:
+		form = form_class()
+		return render(request, template_name, {'form': form})
 
 def ChangePassword(request):
 	pass
@@ -30,7 +23,7 @@ def ChangePassword(request):
 def Login(request):
 	username = request.POST['login-username']	# if you can find a value, return an empty string
 	password = request.POST['login-password']
-	user = authenticate(username=username, password=password)
+	user = authenticate(username=username, password=password) # Ensuring that this user exists
 
 	if user is not None:
 		login(request, user)

@@ -7,17 +7,17 @@ from django.conf import settings
 # SCHOOLS:
 # --------
 class School(models.Model):
-    school_id = models.AutoField(primary_key=True, null=False)
-    school_name = models.CharField(max_length=100, null=False, blank=True)
-    school_address = models.CharField(max_length=100, null=True, blank=True)
+    id = models.AutoField(primary_key=True, null=False)
+    school_name = models.CharField(max_length=100, null=False, blank=False)
+    school_address = models.CharField(max_length=100, blank=True, null=True) # Can be left as an empty string in DB
 
     class Meta:
 		# db_table = "Database_Schools"
         verbose_name = 'School'
         verbose_name_plural = 'Schools'
     def __str__(self):
-        return '%s, %s' % (self.school_id, self.school_name)
-        
+        return '%s, %s' % (self.id, self.school_name)
+
 # SPORTS:
 # -------
 class Sport(models.Model):
@@ -51,11 +51,13 @@ class Sport(models.Model):
         return '%s' % (self.sports_name)
 
 # SCHOOL-SPORTS: [Many-To-One with 'Schools' (One school can have many sports) | Many-To-One with 'Sports' (One sport, many schools)]
+# Basically, each instancce of School_Sport will have access to one school and one sport. We enforce that each instance must contains
+# a unique combination of school and sport, as a user will only be allowed to associate with one sport in a school.
 # --------------
 class School_Sport(models.Model):
     unique_id = models.AutoField(primary_key=True, null=False) 	#Can't set school to primary key, because the school's id  alone would be unique
-    ss_school_id = models.ForeignKey('School', related_name='ss_school_id', on_delete=models.CASCADE)
-    ss_sports_id = models.ForeignKey('Sport', related_name="ss_sports_id", on_delete=models.CASCADE)
+    ss_school_id = models.ForeignKey('School', related_name='ss_school_id', on_delete=models.CASCADE) # instances of School_Sport will have access to one unique school. See Meta
+    ss_sports_id = models.ForeignKey('Sport', related_name="ss_sports_id", on_delete=models.CASCADE) # Sport has access to School_Sport instance through school_sport_set.all()
 
     class Meta:
         # Composite key
@@ -74,12 +76,12 @@ class School_Sport(models.Model):
 # USER-SCHOOLS: [Many-To-One with 'Users' (One user many school scholarships) | Many-To-One with 'Schools' (One school many users)]
 # -------------
 class User_School(models.Model):
-    unique_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     student_id = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='us_student_id', on_delete=models.CASCADE)		# Populate by grabbing request.user from form
-    student_school_id = models.ForeignKey('School', related_name='us_student_school_id', on_delete=models.CASCADE)
+    school_id = models.ForeignKey('School', related_name='us_student_school_id', on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ('student_id', 'student_school_id')
+        unique_together = ('student_id', 'school_id')
         verbose_name = "User_School"
         verbose_name_plural = "User_Schools"
 
