@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from . import views
 
 app_name = 'Accounts_Namespace'
@@ -10,6 +10,6 @@ urlpatterns = [
 	url(r'^logout/$', views.Logout, name='Accounts_Logout'),
 	url(r'^profile/$', views.ViewProfile, name='Accounts_View_Profile'),
 	url(r'^profile/edit/$', views.EditProfile, name="Accounts_Edit_Profile"),
-	url(r'^school/$', include('student_map_app/urls', namespace="Student_Maps_Namespace")),
+	url(r'^school/', include('student_map_app.urls', namespace="Student_Maps_Namespace")),
 
 ]

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 	'accounts_app',
 	'posts_app',
 	'scholarship_map',
+	'student_map_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,0 +1,12 @@
+{% extends "Base.html "%}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'CSS/student_map_app/School_Landing.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'CSS/Base.css' %}"/>
+{% endblock %}
+{% block main %}
+  <form class="School-Select-Form" action="" method="POST">
+    <label for="dropdown-choicefield-id">Select your school</label>
+    {{ form.school_options }}
+  </form>
+{% endblock %}

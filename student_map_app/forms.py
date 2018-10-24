@@ -1,12 +1,10 @@
-from django.forms import ModelForm
 from django import forms
 
+class SchoolSearchForm(forms.Form):
+	school_search = forms.CharField(max_length=100, min_length=5)
 
-class SchoolSearchForm(forms.form):
-	school_search = forms.CharField(max_length=100, min_length=10)
-
-class SchoolSelectForm(ModelForm):
-		school_options = forms.ChoiceField(choices = [])
-	Class Meta:
-		model = User_School
-		fields = ['school_options']
+	def __init__(self, *args, **kwargs):
+		super(SchoolSearchForm, self).__init__(*args, **kwargs)
+		self.fields['school_search'].widget.attrs={'id': 'school-search-form',}
+class SchoolSelectForm(forms.Form):
+		school_options = forms.ChoiceField(choices = [], initial='')
