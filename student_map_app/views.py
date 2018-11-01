@@ -9,7 +9,6 @@ def SchoolLanding(request):
 
 def SchoolSearch(request):
     if request.method == 'POST':
-        print("We made it to the school search page with a POST")
         form = SchoolSearchForm(request.POST)
         if form.is_valid(): # We only have the school_search field, so how does this form fail validation?
             request.session['school_search'] = request.POST['school_search'] # Storing the user's string in the session to be accessed between pages
@@ -17,7 +16,6 @@ def SchoolSearch(request):
         else:
             print(form.errors)
     else:
-        print("We made it tot the school search page with a GET")
         form = SchoolSearchForm()
 
     return render(request, 'student_map_app/School_Search.html', {'form': form})
@@ -26,12 +24,13 @@ def SchoolSelect(request):
     search_data = request.session['school_search']
     if request.method == 'POST':
         form = SchoolSelectForm(request.POST)
-        if request.user.is_authenticated:
-            if form.is_valid():
-                User_School.objects.create(student_id=request.user.id, school_id=School.objects.get(school_name=request.POST['school_options']))
+        if form.is_valid():
+            if request.user.is_authenticated:
+                User_School.objects.create(student_id=request.user, school_id=School.objects.get(school_name=form.cleaned_data['school_options']))
+                #myUser = User_School.objects.get(student_id=request.user)
+
+                #myUser.
                 return HttpResponseRedirect("https://worldstarhiphop.com")
-            else:
-                print(form.errors)
     else:
         form = SchoolSelectForm(request.GET)
         # Form.fields['school_options'] takes a list OR a tuple,
@@ -40,3 +39,8 @@ def SchoolSelect(request):
         form.fields['school_options'].choices = [(choice.school_name, choice) for choice in School.objects.filter(school_name__icontains=search_data)]
 
     return render(request, 'student_map_app/School_Select.html', {'form': form })
+
+def SportSelect(request):
+    pass
+    # Would like a multiplechoice field Here
+    # Make a multiple chocie field Access the User_School.school_id.ss_sports_id

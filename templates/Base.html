@@ -20,7 +20,7 @@
 				</button>
 			</div>
 			{% if user.is_authenticated %}
-				<p style="display: inline-block; margin-bottom: 0px; margin-top: 0px; position: absolute; right: 0vw; bottom: 10vh'"><a href="#" style="text-decoration: none;">{{ user.username }}</a></p>
+				<p style="display: inline-block; margin-bottom: 0px; margin-top: 0px; position: absolute; right: 0vw; bottom: 10vh"><a href="#" style="text-decoration: none;">{{ user.username }}</a></p>
 				<a style="text-decoration: none; position: absolute; right: 0vw; color: darkgrey;" href="javascript: {document.getElementById('logout').submit()}"><i class="fas fa-sign-out-alt" style="position: absolute; right: 0vw;"></i>logout</a>
 				<form action="{% url 'Accounts_Namespace:Accounts_Logout' %}" method="POST" id="logout">
 					{% csrf_token %}

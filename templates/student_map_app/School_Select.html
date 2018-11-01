@@ -7,6 +7,8 @@
 {% block main %}
   <form class="School-Select-Form" action="" method="POST">
     <label for="dropdown-choicefield-id">Select your school</label>
+    {% csrf_token %}
     {{ form.school_options }}
+    <input type="submit" value="Search"/>
   </form>
 {% endblock %}

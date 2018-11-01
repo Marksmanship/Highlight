@@ -41,7 +41,7 @@ class Sport(models.Model):
 		(17, ('Wrestling'))
     )
     sports_id = models.AutoField(primary_key=True, null=False)		# Number correlating to sport name
-    sports_name = models.CharField(choices=SPORTS_CHOICES, max_length=50, default=1, null=False, unique=True)
+    sports_name = models.IntegerField(choices=SPORTS_CHOICES, default=1, null=False, unique=True)
 
     class Meta:
         verbose_name = "Sport"
@@ -55,7 +55,7 @@ class Sport(models.Model):
 # a unique combination of school and sport, as a user will only be allowed to associate with one sport in a school.
 # --------------
 class School_Sport(models.Model):
-    unique_id = models.AutoField(primary_key=True, null=False) 	#Can't set school to primary key, because the school's id  alone would be unique
+    unique_id = models.AutoField(primary_key=True) 	#Can't set school to primary key, because the school's id  alone would be unique
     ss_school_id = models.ForeignKey('School', related_name='ss_school_id', on_delete=models.CASCADE) # instances of School_Sport will have access to one unique school. See Meta
     ss_sports_id = models.ForeignKey('Sport', related_name="ss_sports_id", on_delete=models.CASCADE) # Sport has access to School_Sport instance through school_sport_set.all()
 
@@ -68,7 +68,7 @@ class School_Sport(models.Model):
         verbose_name_plural = "School_Sports"
     def my_custom_sql(self):
         cursor = connection.cursor()
-        cursor.execute("SELECT school_name FROM scholarship_map_school where school_id=%s", [self.ss_school_id])
+        cursor.execute("SELECT school_name FROM scholarship_map_school where id=%s", [self.ss_school_id])
         raw_name = cursor.fetchall()
         return raw_name
     def __str__(self):
@@ -76,9 +76,9 @@ class School_Sport(models.Model):
 # USER-SCHOOLS: [Many-To-One with 'Users' (One user many school scholarships) | Many-To-One with 'Schools' (One school many users)]
 # -------------
 class User_School(models.Model):
-    id = models.AutoField(primary_key=True)
-    student_id = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='us_student_id', on_delete=models.CASCADE)		# Populate by grabbing request.user from form
-    school_id = models.ForeignKey('School', related_name='us_student_school_id', on_delete=models.CASCADE)
+    id = models.AutoField(primary_key=True, on_delete=models.CASCADE)
+    student_id = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_school_set', on_delete=models.CASCADE)		# Populate by grabbing request.user from form
+    school_id = models.ForeignKey('School_Sport', on_delete=models.CASCADE) # Decide which related name you want to use for this model
 
     class Meta:
         unique_together = ('student_id', 'school_id')
@@ -88,7 +88,7 @@ class User_School(models.Model):
 # USER-SPORTS: [Many-To-One with 'Users' (One user multiple sports) | Many-To-One with 'Sports' (One sport multiple users)]
 # ------------
 class User_Sport(models.Model):
-    unique_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True, on_delete=models.CASCADE)
     student_id = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='usersports_student_id', on_delete=models.CASCADE)
     sports_id = models.ForeignKey('Sport', related_name='usersports_sports_id', on_delete=models.CASCADE)
 
