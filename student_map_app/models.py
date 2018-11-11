@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from scholarship_map.models import Sport
+from django.conf import settings
 SF = "Small Forward"
 PF = "Point Forward"
 PG = "Point Guard"
@@ -12,8 +13,7 @@ FC = "Forward Center"
 # Create your models here.
 class Basketball(models.Model):
     id = models.AutoField(primary_key=True, null=False)
-    user = models.ForeignKey(User, related_name='user_sport')# get_user_model.obj
-    sport_name = models.ForeignKey(Sport)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_sport', on_delete=models.CASCADE)# get_user_model.obj
     position = models.CharField(max_length=100,choices=(
         (SF, "Small Forward"),
         (PF, "Point Forward"),

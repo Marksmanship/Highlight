@@ -76,7 +76,7 @@ class School_Sport(models.Model):
 # USER-SCHOOLS: [Many-To-One with 'Users' (One user many school scholarships) | Many-To-One with 'Schools' (One school many users)]
 # -------------
 class User_School(models.Model):
-    id = models.AutoField(primary_key=True, on_delete=models.CASCADE)
+    id = models.AutoField(primary_key=True)
     student_id = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_school_set', on_delete=models.CASCADE)		# Populate by grabbing request.user from form
     school_id = models.ForeignKey('School_Sport', on_delete=models.CASCADE) # Decide which related name you want to use for this model
 
@@ -88,7 +88,7 @@ class User_School(models.Model):
 # USER-SPORTS: [Many-To-One with 'Users' (One user multiple sports) | Many-To-One with 'Sports' (One sport multiple users)]
 # ------------
 class User_Sport(models.Model):
-    id = models.AutoField(primary_key=True, on_delete=models.CASCADE)
+    id = models.AutoField(primary_key=True)
     student_id = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='usersports_student_id', on_delete=models.CASCADE)
     sports_id = models.ForeignKey('Sport', related_name='usersports_sports_id', on_delete=models.CASCADE)
 
@@ -103,7 +103,7 @@ class User_Sport(models.Model):
 # SPORT STATS - USERS:
 # --------------------
 class Sport_Stat(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, related_name='user', on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, related_name='my_user', on_delete=models.CASCADE)
     position = models.CharField(max_length=40, null=False)
     matches_won = models.IntegerField(default=0, null=False)
 

@@ -15,7 +15,7 @@ class User(AbstractUser):	# Abstract/Auth User used when altering field count of
 	# User: username
 	# User: email
 	occupation = models.CharField(default='A', max_length=30,choices=OCCUPATIONS)
-	child = models.ForeignKey('self', blank=True, null=True)
+	child = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
 class UserProfile(models.Model):
 	DEFAULT_AVATAR = 'defaults/default_avatar.jpg'
 	DEFAULT_BANNER = 'defaults/default_banner.png'
