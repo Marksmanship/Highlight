@@ -17,6 +17,6 @@ class Post(models.Model):
 
 	def get_object_or_404(self): # Utilized by the view
 		return "/blog/%s" % (self.id)
-		
+
 	def __str__(self):
 		return self.title

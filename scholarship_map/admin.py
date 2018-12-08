@@ -5,7 +5,7 @@ from .models import (
 	School_Sport,
 	User_School,
 	User_Sport,
-	Sport_Stat,
+	# Sport_Stat,
 )
 # Register your models here.
 admin.site.register(School)
@@ -13,4 +13,4 @@ admin.site.register(Sport)
 admin.site.register(School_Sport)
 admin.site.register(User_School)
 admin.site.register(User_Sport)
-admin.site.register(Sport_Stat)
+# admin.site.register(Sport_Stat)

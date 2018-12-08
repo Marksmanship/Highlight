@@ -1,13 +1,13 @@
 from django.db import models, connection
 from django.conf import settings
-
+from django.contrib.auth import get_user_model
 # One-To-Many only works in one direction in django, that direction being Many-To-One. This means
 # that you must set the foreign key constraints on the many side. ForeignKey is only one-to-one
 # if you specify ForeignKey(unique=True).Add FK to the one side.
 # SCHOOLS:
 # --------
 class School(models.Model):
-    id = models.AutoField(primary_key=True, null=False)
+    id = models.AutoField(primary_key=True)
     school_name = models.CharField(max_length=100, null=False, blank=False)
     school_address = models.CharField(max_length=100, blank=True, null=True) # Can be left as an empty string in DB
 
@@ -21,6 +21,7 @@ class School(models.Model):
 # SPORTS:
 # -------
 class Sport(models.Model):
+    sports_id = models.AutoField(primary_key=True, null=False)		# Number correlating to sport name
     SPORTS_CHOICES = (
         (1, ('Baseball')),
 		(2, ('Basketball')),
@@ -40,8 +41,7 @@ class Sport(models.Model):
 		(16, ('Volleyball')),
 		(17, ('Wrestling'))
     )
-    sports_id = models.AutoField(primary_key=True, null=False)		# Number correlating to sport name
-    sports_name = models.IntegerField(choices=SPORTS_CHOICES, default=1, null=False, unique=True)
+    sports_name = models.IntegerField(choices=SPORTS_CHOICES, null=False)
 
     class Meta:
         verbose_name = "Sport"
@@ -55,7 +55,7 @@ class Sport(models.Model):
 # a unique combination of school and sport, as a user will only be allowed to associate with one sport in a school.
 # --------------
 class School_Sport(models.Model):
-    unique_id = models.AutoField(primary_key=True) 	#Can't set school to primary key, because the school's id  alone would be unique
+    # unique_id = models.AutoField(primary_key=True) 	#Can't set school to primary key, because the school's id  alone would be unique
     ss_school_id = models.ForeignKey('School', related_name='ss_school_id', on_delete=models.CASCADE) # instances of School_Sport will have access to one unique school. See Meta
     ss_sports_id = models.ForeignKey('Sport', related_name="ss_sports_id", on_delete=models.CASCADE) # Sport has access to School_Sport instance through school_sport_set.all()
 
@@ -76,9 +76,9 @@ class School_Sport(models.Model):
 # USER-SCHOOLS: [Many-To-One with 'Users' (One user many school scholarships) | Many-To-One with 'Schools' (One school many users)]
 # -------------
 class User_School(models.Model):
-    id = models.AutoField(primary_key=True)
-    student_id = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_school_set', on_delete=models.CASCADE)		# Populate by grabbing request.user from form
-    school_id = models.ForeignKey('School_Sport', on_delete=models.CASCADE) # Decide which related name you want to use for this model
+    # id = models.AutoField(primary_key=True)
+    student_id = models.ForeignKey(get_user_model(), related_name='user_school_set', on_delete=models.CASCADE)		# Populate by grabbing request.user from form
+    school_id = models.ForeignKey('School_Sport', on_delete=models.CASCADE, default=None) # Decide which related name you want to use for this model
 
     class Meta:
         unique_together = ('student_id', 'school_id')
@@ -88,8 +88,8 @@ class User_School(models.Model):
 # USER-SPORTS: [Many-To-One with 'Users' (One user multiple sports) | Many-To-One with 'Sports' (One sport multiple users)]
 # ------------
 class User_Sport(models.Model):
-    id = models.AutoField(primary_key=True)
-    student_id = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='usersports_student_id', on_delete=models.CASCADE)
+    # id = models.AutoField(primary_key=True)
+    student_id = models.ForeignKey(get_user_model(), related_name='usersports_student_id', on_delete=models.CASCADE)
     sports_id = models.ForeignKey('Sport', related_name='usersports_sports_id', on_delete=models.CASCADE)
 
     class Meta:
@@ -102,11 +102,10 @@ class User_Sport(models.Model):
 
 # SPORT STATS - USERS:
 # --------------------
-class Sport_Stat(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, related_name='my_user', on_delete=models.CASCADE)
-    position = models.CharField(max_length=40, null=False)
-    matches_won = models.IntegerField(default=0, null=False)
-
-    class Meta:
-        verbose_name = "Sport_Stat"
-        verbose_name_plural = "Sports_Stats"
+# class Sport_Stat(models.Model):
+#     user = models.OneToOneField(get_user_model(), primary_key=True, related_name='my_user', on_delete=models.CASCADE)
+#     position = models.CharField(max_length=40, null=False)
+#
+#     class Meta:
+#         verbose_name = "Sport_Stat"
+#         verbose_name_plural = "Sports_Stats"

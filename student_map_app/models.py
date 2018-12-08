@@ -1,7 +1,11 @@
-from django.db import models
-from django.contrib.auth.models import User
-from scholarship_map.models import Sport
+# This file doesn't cause the 0 Primary Key erorr
 from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
+from django.db import models
+
+from scholarship_map.models import Sport
+
 SF = "Small Forward"
 PF = "Point Forward"
 PG = "Point Guard"
@@ -12,8 +16,8 @@ PTF = "Point Forward"
 FC = "Forward Center"
 # Create your models here.
 class Basketball(models.Model):
-    id = models.AutoField(primary_key=True, null=False)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='user_sport', on_delete=models.CASCADE)# get_user_model.obj
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(get_user_model(), related_name='user_sport', on_delete=models.CASCADE)# get_user_model.obj
     position = models.CharField(max_length=100,choices=(
         (SF, "Small Forward"),
         (PF, "Point Forward"),

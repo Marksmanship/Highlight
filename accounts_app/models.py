@@ -1,7 +1,7 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser, User
 from django.db.models.signals import post_save
-from django.conf import settings
 
 class User(AbstractUser):	# Abstract/Auth User used when altering field count of User model
 	OCCUPATIONS = (
@@ -15,12 +15,12 @@ class User(AbstractUser):	# Abstract/Auth User used when altering field count of
 	# User: username
 	# User: email
 	occupation = models.CharField(default='A', max_length=30,choices=OCCUPATIONS)
-	child = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE)
+	# child = models.ForeignKey('self', blank=True, null=True, default=None, on_delete=models.CASCADE)
 class UserProfile(models.Model):
 	DEFAULT_AVATAR = 'defaults/default_avatar.jpg'
 	DEFAULT_BANNER = 'defaults/default_banner.png'
 
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
 	city = models.CharField(max_length=100, null=True, blank=True)
 	phone = models.IntegerField(default=0, null=True, blank=True)
 	avatar = models.ImageField(upload_to='user_avatar', blank=True, null=True, default=DEFAULT_AVATAR)	# blank=true means the field is not required for validation
