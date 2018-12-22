@@ -38,28 +38,11 @@ class Sport(models.Model):
         ('SWIMMING','Swimming'),
         ('TENNIS','Tennis'),
         ('TRACK AND FIELD','Track and Field'),
-        ('SWIMMING','Swimming'),
+        ('VOLLEYBALL','Volleyball'),
+        ('WRESTLING','Wrestling'),
     )
-    SPORTS_CHOICES = (
-        (1, ('Baseball')),
-		(2, ('Basketball')),
-		(3, ('Bowling')),
-		(4, ('Cheerleading')),
-		(5, ('Cross Country')),
-		(6, ('Dance Team')),
-		(7, ('Football')),
-		(8, ('Golf')),
-		(9, ('Gymnastics')),
-		(10, ('Hockey')),
-		(11, ('Soccer')),
-		(12, ('Softball')),
-		(13, ('Swimming')),
-		(14, ('Tennis')),
-		(15, ('Track & Field')),
-		(16, ('Volleyball')),
-		(17, ('Wrestling'))
-    )
-    sports_name = models.IntegerField(choices=SPORTS_CHOICES, null=False)
+
+    sports_name = models.CharField(choices=SPORTS_CHOICES, null=False, max_length=45)
 
     class Meta:
         verbose_name = "Sport"
@@ -96,7 +79,7 @@ class School_Sport(models.Model): #
 class User_School(models.Model):
     id = models.AutoField(primary_key=True)
     student_id = models.ForeignKey(get_user_model(), related_name='user_school_set', on_delete=models.CASCADE)		# Populate by grabbing request.user from form
-    school_id = models.ForeignKey('School_Sport', on_delete=models.CASCADE, default=None) # Decide which related name you want to use for this model
+    school_id = models.ForeignKey('School', on_delete=models.CASCADE, default=None) # Decide which related name you want to use for this model
 
     class Meta:
         unique_together = ('student_id', 'school_id')
