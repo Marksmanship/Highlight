@@ -85,6 +85,8 @@ class User_School(models.Model):
         unique_together = ('student_id', 'school_id')
         verbose_name = "User_School"
         verbose_name_plural = "User_Schools"
+    def __str__(self):
+        return '%s %s of %s' % (self.student_id.first_name, self.student_id.last_name, self.school_id.school_name)
 
 # USER-SPORTS: [Many-To-One with 'Users' (One user multiple sports) | Many-To-One with 'Sports' (One sport multiple users)]
 # ------------
