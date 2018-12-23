@@ -7,23 +7,13 @@
 {% endblock %}
 {% block main %}
   <form id="Search-Form" action="" method="POST"> <!-- Trying to go back one directory -->
-      {% csrf_token %}
+  {% csrf_token %}
     <label for="search-charfield-id">Find your school</label>
     {{ form }}
     <input type="submit" value="Search" id="search-button"/>
   </form>
 {% endblock %}
 {% block scripts %}
-<script>
-(function(){
-    var HttpRequest;
-    document.getElementById('Seach-Form').addEventListener('submit', makeRequest);
-
-    function makeRequest() {
-        HttpRequest = new XMLHttpRequest();
-
-    }
-
-})
-</script>
+<script src = "https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="{% static 'Scripts/student_map_app/main.js' %}"></script>
 {% endblock %}

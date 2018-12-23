@@ -16,7 +16,7 @@ class School(models.Model):
         verbose_name = 'School'
         verbose_name_plural = 'Schools'
     def __str__(self):
-        return '%s, %s' % (self.id, self.school_name)
+        return '%s' % ( self.school_name)
 
 # SPORTS:
 # -------
@@ -57,8 +57,8 @@ class Sport(models.Model):
 # --------------
 class School_Sport(models.Model): #
     id = models.AutoField(primary_key=True) 	#Can't set school to primary key, because the school's id  alone would be unique
-    ss_school_id = models.ForeignKey('School', related_name='rn_school_i', on_delete=models.CASCADE) # instances of School_Sport will have access to one unique school. See Meta
-    ss_sports_id = models.ForeignKey('Sport', related_name="rn_sport_i", on_delete=models.CASCADE) # Sport has access to School_Sport instance through school_sport_set.all()
+    ss_school_id = models.ForeignKey('School', related_name='rn_school_schoolsport', on_delete=models.CASCADE) # instances of School_Sport will have access to one unique school. See Meta
+    ss_sports_id = models.ForeignKey('Sport', related_name="rn_sport_schoolsport", on_delete=models.CASCADE) # Sport has access to School_Sport instance through school_sport_set.all()
 
     class Meta:
         # Composite key
@@ -105,10 +105,12 @@ class User_Sport(models.Model):
 
 # SPORT STATS - USERS:
 # --------------------
-# class Sport_Stat(models.Model):
-#     user = models.OneToOneField(get_user_model(), primary_key=True, related_name='my_user', on_delete=models.CASCADE)
+# class User_Sport_Stats(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     user = models.OneToOneField(get_user_model(), related_name='my_user', on_delete=models.CASCADE)
 #     position = models.CharField(max_length=40, null=False)
 #
 #     class Meta:
 #         verbose_name = "Sport_Stat"
 #         verbose_name_plural = "Sports_Stats"
+# class School_Sport_Stats(model.Model):

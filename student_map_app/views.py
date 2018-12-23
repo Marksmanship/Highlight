@@ -24,20 +24,16 @@ def SchoolSelect(request):
     search_data = request.session['school_search']
     if request.method == 'POST':
         form = SchoolSelectForm(request.POST)
+        selectedChoice = request.POST.get('school_options') # Get the value of what was sent
+        form.fields['school_options'].choices = [(selectedChoice, selectedChoice)] # This is (Jamestown, Jamestown). Choices are evaluated through tuples
         if form.is_valid():
             if request.user.is_authenticated:
                 User_School.objects.create(student_id=request.user, school_id=School.objects.get(school_name=form.cleaned_data['school_options']))
-                #myUser = User_School.objects.get(student_id=request.user)
-
-                #myUser.
-                return HttpResponseRedirect("https://worldstarhiphop.com")
     else:
-        form = SchoolSelectForm(request.GET)
-        # Form.fields['school_options'] takes a list OR a tuple,
-        # this filter returns a list itself. I need to return the results of this filter as a tuple and pass it to the field
-        # "choice" alone returns the school id and the school name. The choice.school_name essentially does nothing in this case
+        form = SchoolSelectForm()
+        # Form.fields['school_opt
         form.fields['school_options'].choices = [(choice.school_name, choice) for choice in School.objects.filter(school_name__icontains=search_data)]
-
+        # form.fields['school_options'].choices = [(choice.school_name, choice) for choice in School.objects.filter(school_name__icontains=search_data)]
     return render(request, 'student_map_app/School_Select.html', {'form': form })
 
 def SportSelect(request):

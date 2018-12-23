@@ -5,6 +5,6 @@ class SchoolSearchForm(forms.Form):
 
 	def __init__(self, *args, **kwargs):
 		super(SchoolSearchForm, self).__init__(*args, **kwargs)
-		self.fields['school_search'].widget.attrs={'id': 'school-search-form',}
+		self.fields['school_search'].widget.attrs={'id': 'school-search-box',} # Name of search box not form
 class SchoolSelectForm(forms.Form):
 		school_options = forms.ChoiceField(choices = [], required=False)
