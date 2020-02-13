@@ -1,19 +1,54 @@
-var windowWidth = document.getElementsByClassName('Main-Content')[0].clientWidth;
-var imgContainer = document.getElementsByClassName('Background-Image-Container')[0];
+function Carousel(containerID)
+{
+	this.container = document.getElementById(containerID);
+	this.slides = this.container.querySelectorAll('.Carousel-Item');
+	this.totalSlides = this.slides.length - 1;
+	this.currentSlide = 0;
+	this.slide(this.currentSlide);
+}
+Carousel.prototype.slide = function (index)
+{
+	if (index >= 0 && index <= this.totalSlides)
+	{
+		for (var i=0; i <= this.totalSlides; i++)
+		{
+			// Hide previous elements and display the new one
+			(i === index) ? this.slides[i].style.marginLeft = 0: this.slides[i].style.marginLeft = (-100 * this.totalSlides) + "%";
+		}
+	}
+}
+Carousel.prototype.next = function ()
+{
+	(this.currentSlide == this.totalSlides) ? this.currentSlide = 0 : this.currentSlide += 1;
+    this.slide(this.currentSlide)
+}
+Carousel.prototype.prev = function ()
+{
+	(this.currentSlide == 0) ? this.currentSlide = this.totalSlides : this.currentSlide -= 1;
+}
+
+var myCarousel = new Carousel('background-image-container')
+document.getElementById("next-button").addEventListener("click", myCarousel.next(), false)
 
 
-imgContainer.addEventListener('mousemove', function(){
-  var moveX = document.getElementsByClassName('Main-Content')[0].clientWidth;
-      moveX = ((moveX / 2) - event.pageX) * .035;
-  var moveY = document.getElementsByClassName('Main-Content')[0].clientHeight;
-      moveY = ((moveY / 2) - event.pageY) * .035;
-
-  imgContainer.style.marginLeft = moveX + "px";
-  imgContainer.style.marginTop = moveY + "px";
-});
 
 
-
+// var windowWidth = document.getElementsByClassName('Main-Content')[0].clientWidth;
+// var imgContainer = document.getElementsByClassName('Background-Image-Container')[0];
+//
+//
+// imgContainer.addEventListener('mousemove', function(){
+//   var moveX = document.getElementsByClassName('Main-Content')[0].clientWidth;
+//       moveX = ((moveX / 2) - event.pageX) * .035;
+//   var moveY = document.getElementsByClassName('Main-Content')[0].clientHeight;
+//       moveY = ((moveY / 2) - event.pageY) * .035;
+//
+//   imgContainer.style.marginLeft = moveX + "px";
+//   imgContainer.style.marginTop = moveY + "px";
+// });
+//
+//
+//
 var tabButtons = document.querySelectorAll(".Button-Wrapper button");
 var tabPanels = document.querySelectorAll(".Tab-Panel");
 document.querySelectorAll('.Tab-Panel')[1].style.display = "none";

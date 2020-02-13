@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+	{% block head %}
+	<link type="text/css" rel="stylesheet" href="{% static 'CSS/Base.css' %}"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link type="text/css" rel="stylesheet" href="{% static 'CSS/accounts_app/Profile.css' %}"/>
+
+	<link type="text/css" rel="stylesheet" href="{% static 'CSS/accounts_app/Edit_Profile.css' %}"/>
+	{% endblock %}
+
+	{% block main %}
+		<form id="gallery-formset" method="POST" action='' enctype='multipart/form-data'>
+		    {% csrf_token %}
+			{{ Gallery_Inlineformset.management_form }}
+			{% for image_form in Gallery_Inlineformset %}
+				<div class="gallery-form">
+					{% if image_form.initial.image is not None %}
+						<div class="gallery-image-container" style="background-image: url('{{ image_form.initial.image_url }}')">
+							{{ image_form.image }}
+							<label for="id_gallery-{{forloop.counter0}}-image"></label>
+							<div class="delete-container"></div>
+						</div>
+					{% endif %}
+					{% if image_form.initial.image == None %}
+
+						{{ image_form.image }}	<!-- id_gallery-int-image (id_[prefix]-instance-fieldname) Show the "Choose File" input. this is not he image var from initial data -->
+					{% endif %}
+				</div>
+			{% endfor %}
+		    <input type="submit" name="gallery-submit" value="Submit" />
+		</form>
+	{% endblock %}
+
+	{% block scripts %}
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="{% static 'Scripts/accounts_app/Edit_Profile.js' %}"></script>
+	{% endblock %}

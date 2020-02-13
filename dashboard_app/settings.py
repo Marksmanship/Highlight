@@ -2,23 +2,22 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 AUTH_USER_MODEL = 'accounts_app.User'	# appName.Model
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 CSRF_COOKIE_SECURE=False
 # List of URLS you don't have to be loggin to view
 LOGIN_EXEMPT_URLS = (
 	r'^$',
-	r'^about/$',
 	r'^account/login/$',
-	r'^account/register/$',
-	r'^blog/$',
+	r'^account/$',
+
 )
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/signup/'
-MEDIA_URL = '/media/'	# Shown in browser
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')	# Internal hierarchy
+LOGIN_REDIRECT_URL = '/account/profile/'
+LOGIN_URL = '/'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 ROOT_URLCONF = 'dashboard_app.urls'
-#STATIC_ROOT= os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'	# Shown in browser
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
 	os.path.join(BASE_DIR, 'static'),
 ]
@@ -41,7 +40,7 @@ INSTALLED_APPS = [
 	'dashboard_app',
 	'accounts_app',
 	'posts_app',
-	'scholarship_map',
+	'athlete_and_school_app',
 	'student_map_app',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -73,9 +72,12 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+				'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
             ],
         },

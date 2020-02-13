@@ -1,13 +1,16 @@
 import re
-from django.conf import settings # Importing settings so that we can reference the URLs that don't require a login
+from django.conf import settings
 from django.shortcuts import redirect
 from django.contrib.auth import logout,login,authenticate
 from django.urls import reverse
 from accounts_app.forms import RegistrationForm, ProfileEditForm
+
+
 # If a list by this name exists in settings...
 if hasattr(settings, 'LOGIN_EXEMPT_URLS'):
 	# Loop through it, and recreate this list in a variable located in this file
-	EXEMPT_URLS = [re.compile(url) for url in settings.LOGIN_EXEMPT_URLS]
+	# Exempt urls are urls that you don't have to be logged in to access
+	EXEMPT_URLS = [(re.compile(url.lstrip('/') ))for url in settings.LOGIN_EXEMPT_URLS]
 
 
 class LoginRequriedMiddleware:
@@ -26,49 +29,39 @@ class LoginRequriedMiddleware:
 		response = self.get_response(request)
 		return response
 
+	# request: Default parameter made by django
+	# view_func: Right before django calls a function defined in a view, the function is taken and passed to this view_func parameter
 	def process_view(self, request, view_func, view_args, view_kwargs):
+		# If the request object contains a user
 		assert hasattr(request, 'user')
+		# Defining the path variable to be used in comparison of URLs
 		path = request.path_info.lstrip('/')
 
-		# We must log the user out in the middleware because the if-conditions
-		# below redirect the user based on their logged-in status. This may\
-		# not sound like a problem, but remember, this middleware is called
-		# right before the view is called, so the conditional checks below
-		# are done before the view logs us out, unfortunately. We rectify
-		# this by logging the user out in the middelware.
-		# if path == 'account/logout/':
-		if path == reverse('Accounts_Namespace:Accounts_Logout').lstrip('/'):	# Remove beginning '/' for pattern match below
-			logout(request)		# Request contains the user object
-		if path == reverse('Accounts_Namespace:Accounts_Register').lstrip('/'):
-			if request.method == 'POST':
-				form_class = RegistrationForm
-				form = form_class(request.POST)
-				if form.is_valid():
-					form.save()
+		# Bool for determining if the page the user is trying to access is one that doesn't require a login
+		url_is_exempt = any(pageToBeAccessed.match(path) for pageToBeAccessed in EXEMPT_URLS)
 
-					username = form.cleaned_data['username']
-					password = form.cleaned_data['password1']
-					user = authenticate(username=username, password=password)
+													# Request contains the user object
 
-					if user is not None:
-						if user.is_active:
-					 		login(request, user)
-					 		return redirect('profile/')
-			else:
-				form = form_class()
-				return render(request, template_name, {'form': form})
-		# Variable indicating whether the requested url is exempt from login requirement
-		url_is_exempt = any(url.match(path) for url in EXEMPT_URLS)
-
-		# If the user is already logged in and tries to access a page where you can't be logged in
+		# If a logged in user tries to access a page that doesn't require a login
 		if request.user.is_authenticated and url_is_exempt:
+			# Return them to the page user's are sent to after they log in
+			# print("USER IS LOGGED IN BUT URL IS ONLY FOR ANONS")
+			return redirect(settings.LOGIN_REDIRECT_URL)
+		# If a logged in user tries to acces a page that does require login
+		# OR the user is not logged in and the page doesn't require login
+		elif request.user.is_authenticated or url_is_exempt:
+			# print("USER IS LOGGED IN AND VISITING LOGIN-REQUIRED URLS **OR** THE ANON IS VISITING ANON SITES")
 			return None
-			# return redirect(settings.LOGIN_REDIRECT_URL) 	# Redirect a logged-in user
+		# If a user is not logged in and the page requires login(!user.is_authenticated && !url_is_exempt)
 		else:
-			return None
-		# # Normal behavior: User is visiting non-exempt page, or no user logged in and page doesn't require login
-		# elif request.user.is_authenticated or url_is_exempt:
-		# 	return None		# Middleware doesn't have to do anything
-		# # If the user is not logged in and the url doesn't require login
-		# else:
-		# 	return redirect('settings.LOGIN_URL')
+			# print("AN ANON IS TRYING TO ACCESS A LOGIN-REQUIRED PAGE")
+			# Return them to the login form
+			return redirect(settings.LOGIN_URL)
+
+		# Note, because process_view is called before analyzing the view we've defined, in the case of logout,
+		# django see's we're still logged in. Account/logout requires users to be logged in. As seen above in
+		# the second conditional, if the user is logged in and the url isn't exempt, they stay on the same page.
+		# For this case --where an user is requesting the logout page-- we need an exception.
+		if path == reverse('Accounts_Namespace:Accounts_Logout').lstrip('/'):	# Reverse allows us to grab the url correlating to a view. Remove beginning '/' for pattern match below
+			print("LOGGING OUT USER FROM MIDDLEWARE")
+			logout(request)

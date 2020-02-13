@@ -1,0 +1,361 @@
+.cta-profile-container
+{
+	position: relative;
+	width: 1000px;
+	margin: 7px auto 0 auto;
+	display: grid;
+	grid-template-columns: 35% 65%;	/* Set the width of columns in the grid */
+	grid-template-rows: auto;		/* Set the height for rows in the grid. Leaving at auto, so the size of the table dictates cell size */
+	grid-auto-flow: column;			/* Describe how items not described in the template area fit into scheme */
+	grid-auto-columns: auto;		/* Set the size of the auto-generated columns */
+	grid-template-areas:			/* Lets you populate the grid by specifying names. our grid is 2 columns 3 rows */
+		"cta-banner cta-banner"
+		"cta-avatar cta-table-container"		/* use a '.' to indicate a blank cell in the grid */
+		"cta-full-name cta-gallery" /* Each row needs to have the same number of cells */
+		"cta-activity-feed cta-activity-feed";
+	grid-column-gap: 10px;
+	grid-row-gap: 15px;
+}
+
+.cta-banner
+{
+	grid-area: cta-banner;
+	position: relative;
+	width: 100%;										/* 720px */
+	height: 200px;
+	object-fit: cover;
+	background-color: #f24e0f;
+	z-index: 0;
+	margin: 0 auto;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	-webkit-box-shadow: 0px 2px 14px -4px rgba(0,0,0,0.65);
+}
+#cta-full-name
+{
+	grid-area: cta-full-name;
+	justify-self: center;
+	margin-left: -35%;
+	font-size: 18px;
+	font-weight: bold;
+	color: #24292e;
+}
+.cta-avatar
+{
+	grid-area: cta-avatar;
+	justify-self: center;
+
+	position: relative;
+	object-fit: cover;
+	width: 260px;										/* 270px */
+	height: 275px;
+	border-radius: 4%;
+	z-index: 3;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	margin-top: -90px;
+	-webkit-box-shadow: 0px 2px 14px -4px rgba(0,0,0,0.65);
+}
+
+.cta-gallery
+{
+	grid-area: cta-gallery;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	position: relative;
+	text-align: center;
+	min-width: 270px;
+	width: 585px;
+	height: 130px;
+	margin-top:-50px;
+	background-color: #fdfdfd;
+	border-radius: 4px;
+	-webkit-box-shadow: 0px 10px 5px -9px rgba(0,0,0,0.75);
+}
+	.cta-gallery::before
+	{
+		content: 'Gallery';
+		text-transform: uppercase;
+		color: white;
+		font-size: 18px;
+		position: absolute;
+		top: 0;
+		display: inline-block;
+		width: 100%;
+		height: 20px;
+		line-height: 20px;
+		background-color: #0e2b5b;
+	}
+	.cta-gallery-button
+	{
+		cursor: pointer;
+	    display: inline-block;
+		position: absolute;
+	    width: 146.25px;
+	    height:22px;
+		line-height: 22px;
+	    color: #0e2b5b;
+		/* outline-color: lightblue  The color on click */
+		border: 0;
+		padding: 0;
+		background-color: #e6e9ee;
+		margin: 19px 0 0 0;
+	    font-size: 11px;
+	    text-align: center;
+	    -webkit-transition: 500ms all;
+	    -moz-transition: 500ms all;
+	    transition: 500ms all;
+	}
+	.cta-gallery-button:hover
+	{
+		color: #e6e9ee;
+		background-color: #0E2B5B;
+	}
+		.cta-gallery-button:nth-child(1)
+		{
+			left: 0;
+		}
+		.cta-gallery-button:nth-child(2)
+		{
+			left: 146.25px;
+		}
+		.cta-gallery-button:nth-child(3)
+		{
+			left: 292.5px;
+		}
+		.cta-gallery-button:nth-child(4)
+		{
+			left: 438.75px;
+		}
+	.cta-gallery-images
+	{
+		width: 100px;
+		height: 75px;
+		display: inline-block;
+		-webkit-transition: width, height .5s;
+		cursor: pointer;
+		margin-top: 45px;
+		border-radius: 4px;
+		-webkit-box-shadow: 0px 2px 14px -4px rgba(0,0,0,0.65);
+	}
+		.cta-gallery-images:hover
+		{
+		  -webkit-transition: all .3s ease-in;
+		  -moz-transition: all .3s ease-in;
+		  -ms-transition: all .3s ease-in;
+		  -o-transition: all .3s ease-in;
+		  transition: all .3s ease-in;
+		  opacity: 1;
+		  transform: scale(1.15);
+		  -ms-transform: scale(1.15); /* IE 9 */
+		  -webkit-transform: scale(1.15); /* Safari and Chrome */
+		}
+
+#cta-table-container
+{
+	grid-area: cta-table-container;
+	width: 580px;
+	height: 210px;
+	overflow: hidden;
+	padding: 25px 5px 5px 0px;
+	margin-top: -90px;
+	z-index: 5;
+	border-radius: 4px;
+	background-color: transparent;
+}
+
+.cta-sport-table
+{
+	position: relative;
+	background-color: white;
+	-webkit-box-shadow: 0px 10px 5px -9px rgba(0,0,0,0.75);
+	margin: 0 0 30px 0;
+	width: 100%;
+	height: 180px;
+	float: left;
+	border-collapse: collapse;
+	border-spacing: 0;
+	transition: margin ease-in-out 1.75s;
+}
+	.cta-sport-table > tbody::before
+	{
+		content:'';
+		line-height: 25px;
+		position: absolute;
+		top: -13px;
+		height: 30px;
+		width: 100.4%;
+		background-color: #091e3f;  /* Our logo color: #0e2b5b, appeared much lighter on this ::before than other elements, so we're using a darker color*/
+		text-align: center;
+		padding-top: 3px;
+		text-transform: uppercase;
+		color: white;
+	}
+		.cta-sport-table#Baseball_Table > tbody::before
+		{
+			content: 'Baseball'
+
+		}
+	.cta-sport-table tr.header-row
+	{
+		background-color: #b5bbc5;
+	}
+		.cta-sport-table tr.header-row th:nth-child(1)
+		{
+			border-left: 1px solid #b5bbc5;
+		}
+		.cta-sport-table tr.header-row th:nth-last-child(1)
+		{
+			border-right: 1px solid #b5bbc5;
+		}
+	.cta-sport-table th, td
+	{
+		border-collapse: collapse;
+		text-align: center;
+		border: 1px solid #e1e4e8;
+		border-spacing: 0px;
+	}
+	.cta-sport-table th
+	{
+		width: 39px;
+	}
+	.cta-sport-table td
+	{
+	}
+
+#cta-activity-feed
+{
+	position: relative;
+	grid-area: cta-activity-feed;
+	justify-self: center;
+	z-index: 1;
+	margin: 0 2% 0 3%;
+	width: 95%;
+	min-height: 300px;
+	max-height: 425px;
+	padding: 10px 25px 10px 25px;
+	overflow-y: scroll;
+	border-top: 1px solid #e1e4e8;
+    box-shadow: 0px 7px 20px -10px rgba(0,0,0,1);
+    border-left: 1px solid #e1e4e8;
+    border-bottom: 1px solid #e1e4e8;
+}
+	#activity-feed::before
+	{
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 25%;
+		height: 30px;
+		background-color: #bc0e48;
+		border-radius: 4px;
+		-webkit-box-shadow: 0px 2px 14px -4px rgba(0,0,0,0.65);
+	}
+		#activity-feed:hover::before
+		{
+			cursor: pointer;
+		}
+	#activity-feed-header
+	{
+		text-decoration: underline;
+		display: block;
+		font-size: 2.0em;
+		margin-bottom: 10px;
+	}
+	.cta-activity-item
+	{
+		list-style-type: none;
+		text-decoration: none;
+		margin: 0 0 5px 0;
+	}
+#Line-1-Grid
+{
+  		width: 500px;
+  		height: 2px;
+  		background: black;
+  		background: -webkit-gradient(linear, 0 0, 100% 0, from(transparent), to(transparent), color-stop(50%, #F28F91));
+}
+
+#up-arrow,
+#down-arrow{
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	border: solid black;
+	border-width: 0 3px 3px 0;
+	cursor: pointer;
+	right: 30px;
+	transition: all ease-in .15s;
+}
+	#up-arrow:hover,
+	#down-arrow:hover
+	{
+		border: solid #bc0e48;
+		border-width: 0 3px 3px 0;
+	}
+	#up-arrow
+	{
+		transform: rotate(-135deg);
+	  	-webkit-transform: rotate(-135deg);
+		top: 220px;
+	}
+	#down-arrow
+	{
+		transform: rotate(45deg);
+	  	-webkit-transform: rotate(45deg);
+		top: 270px;
+	}
+	#cta-friends
+	{
+		width: 400px;
+		display: inline;
+		grid-column: 3/4;
+		grid-row: 3/4;
+		list-style-type: none;
+	}
+	#cta-friends > li:not(:nth-child(1))
+	{
+		padding: 15px 0 15px 25px;
+	}
+	#cta-friends > li
+	{
+		border-bottom: 1px solid #e1e4e8;
+	}
+		#cta-friends > li a
+		{
+			transition: color .15s;
+			color: blue;
+		}
+		#cta-friends > li a:hover
+		{
+			color: red;
+		}
+	#cta-suggested-friends
+	{
+		width: 400px;
+		display: inline;
+		grid-column: 3/4;
+		grid-row: 1/2;
+		list-style-type: none;
+	}
+		#cta-suggested-friends > li:not(:nth-child(1))
+		{
+			padding: 15px 0 15px 25px;
+		}
+		#cta-suggested-friends > li
+		{
+			border-bottom: 1px solid #e1e4e8;
+		}
+			#cta-suggested-friends > li a
+			{
+				transition: color .15s;
+				color: blue;
+			}
+			#cta-suggested-friends > li a:hover
+			{
+				color: red;
+			}

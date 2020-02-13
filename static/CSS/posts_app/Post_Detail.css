@@ -1,0 +1,109 @@
+
+#blog-container
+{
+	width: 1000px;
+	margin: 7px auto 0 auto;
+	overflow-x: hidden;
+	display: grid;
+	grid-template-columns: 85% 15%;	/* One column takes up 75% of the width, the other 25% */
+	grid-template-rows: 300px;		/* Explicity make one row 300px in height */
+
+	grid-auto-flow: column;			/* Place item new columns when it is not explicity position */
+	grid-auto-columns: auto;		/* Let the content determine how wide the column is */
+
+	grid-auto-rows: auto;			/* Let the content determine how tall the row is */
+	grid-template-areas:
+		"background-image ."
+		"blog-header ."
+		"blog-content .";
+}
+#blog-background
+{
+	grid-area: background-image;
+	width: 100%;
+	height: 100%;					/* Obtain the height explicity defined by grid-template-rows */
+	display: block;
+	object-fit: cover;
+}
+#blog-header
+{
+	grid-area: blog-header;
+}
+#blog-content
+{
+	grid-area: blog-content;
+}
+#blog-post-favorite
+{
+	position: relative;
+	width: 50px;
+	height: 50px;
+	background-color: darkblue;
+	margin-left: 100px;
+}
+#blog-post-favorite:hover
+{
+	cursor: pointer;
+}
+#blog-post-like
+{
+	position: relative;
+	width: 20px;
+	height: 20px;
+	transform: rotate(-45deg);
+	background-color: #f9f9f9;
+}
+	#blog-post-like.liked
+	{
+		background-color: red;
+	}
+	#blog-post-like::before,
+	#blog-post-like::after
+	{
+		content: "";
+		position: absolute;
+		border-radius: 50%;
+		width: 20px;
+		height: 20px;
+		background-color: #f9f9f9;
+	}
+		#blog-post-like::before
+		{
+			top: -10px;
+		}
+		#blog-post-like::after
+		{
+			right: -10px;
+		}
+		#blog-post-like.liked::after,
+		#blog-post-like.liked::before
+		{
+			background-color: red;
+			content:'';
+			position: absolute;
+			border-radius: 50%;
+			width: 20px;
+			height: 20px;
+		}
+		#blog-post-like.liked::before
+		{
+			top: -10px;
+		}
+		#blog-post-like.liked::after
+		{
+			right: -10px;
+		}
+
+#blog-post-like:hover
+{
+	cursor: pointer;
+}
+#activity-feed
+{
+	position: relative;
+	width: 100px;
+	height: 100px;
+
+	background-color: transparent;
+
+}

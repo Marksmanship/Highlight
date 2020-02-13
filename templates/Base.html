@@ -6,31 +6,44 @@
 	</head>
 	<body>
 		<header class="Navigation">
-			<div class="Logo" onclick="location.href='{% url 'Home_View' %}'"></div>
-			<ul class="Nav-Links">
-				<li><a href="{% url 'Home_View' %}" class="Active">Home</a></li>
-				<li><a href="{% url 'About_View' %}">About</a></li>
-				<li><a href="{% url 'Sports_View' %}">Sports</a></li>
-				<li><a href="{% url 'Posts_Namespace:Posts_List' %}">Blog</a></li>
-			</ul>
-			<div class="Search-Wrapper">
-				<input type="text" class="Search-Bar" placeholder="Search">
-				<button type="submit" class="Search-Button">
-					<i class="fa fa-search"></i>
-				</button>
-			</div>
-			{% if user.is_authenticated %}
-				<p style="display: inline-block; margin-bottom: 0px; margin-top: 0px; position: absolute; right: 0vw; bottom: 10vh"><a href="#" style="text-decoration: none;">{{ user.username }}</a></p>
-				<a style="text-decoration: none; position: absolute; right: 0vw; color: darkgrey;" href="javascript: {document.getElementById('logout').submit()}"><i class="fas fa-sign-out-alt" style="position: absolute; right: 0vw;"></i>logout</a>
-				<form action="{% url 'Accounts_Namespace:Accounts_Logout' %}" method="POST" id="logout">
-					{% csrf_token %}
-					<input type="hidden>">
-				</form>
-			{% endif %}
+			{% block nav %}
+				{% if user.is_authenticated %}
+					<div class="Logo" onclick="location.href='{% url 'Dashboard_View' %}'"></div>
+					<ul class="Nav-Links">
+						<li><a href="{% url 'Dashboard_View' %}" class="Active">Dashboard</a></li>
+						<li><a href="{% url 'About_View' %}" id="nav-highlight">Highlights</a></li>
+						<li><a href="{% url 'Sports_View' %}">Sports</a></li>
+						<li><a href="{% url 'Posts_Namespace:Posts_List' %}">Articles</a></li>
+					</ul>
+					<div id="avatar-modal">
+						<img id="avatar-modal-image" src="{{user.userprofile.avatar.url}}"/>
+						<ul id="avatar-modal-menu">
+							<li><a href="{% url 'Accounts_Namespace:Accounts_View_Profile' %}">View Profile</a></li>
+							<li><a href="{% url 'Accounts_Namespace:Accounts_Edit_Profile' %}">Edit Profile</a></li>
+							<li><a href="#">Account Settings</a></li>
+							<li><a href="#">Help</a></li>
+							<li><a href="#">Sign out</a></li>
+						</ul>
+					</div>
+				{% else %}
+					<div class="Logo" onclick="location.href='{% url 'Home_View' %}'"></div>
+					<ul class="Nav-Links">
+						<li><a href="{% url 'Home_View' %}" class="Active">Home</a></li>
+						<li><a href="{% url 'Posts_Namespace:Posts_List' %}">Articles</a></li>
+						<li><a href="{% url 'About_View' %}">About Us</a></li>
+						<li><a href="{% url 'Sports_View' %}">Guide</a></li>
+
+					</ul>
+				{% endif %}
+			{% endblock %}
 			<div class="Color-Bar"></div>
 		</header>
-		{% block main %}
-		{% endblock %}
+		<section class="Container">
+			<section class="Main-Content">
+				{% block main %}
+				{% endblock %}
+			</section>
+		</section>
 		<footer>
 			<div class="Bottom-Banner">
 				<p>#169 2017 All Rights Reserved Terms of Use and Privacy Policy</p>
@@ -46,6 +59,17 @@
 			</div>
 		</footer>
 		{% block scripts %}
+			"{% if user.is_authenticated %}"
+				<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+				<script type="text/javascript">
+						// Handling the avatar modal
+						modal = document.getElementById('avatar-modal-image');
+
+						modal.addEventListener("click", function(){
+							$('#avatar-modal').toggleClass('clicked');
+						});
+				</script>
+			"{% endif %}"
 		{% endblock %}
 	</body>
 </html>

@@ -1,0 +1,23 @@
+{% extends "Base.html" %}
+{% load static %}
+
+	{% block head %}
+		<link type="text/css" rel="stylesheet" href="{% static 'CSS/Base.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'CSS/dashboard_app/Dashboard.css'%}"></link>
+	{% endblock %}
+
+	{% block main %}
+		<div id="dashboard-container">
+			<div id="dashboard-wrapper">
+				<div id="highlight-reel"></div>
+				<div id="scholarships"></div>
+				<div id="activity-feed"></div>
+				<div id="newest-posts"></div>
+				<div id="contacts"></div>
+			</div>
+		</div>
+	{% endblock %}
+
+	{% block scripts %}
+		{{ block.super }}
+	{% endblock %}

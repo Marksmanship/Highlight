@@ -1,0 +1,35 @@
+.affiliation-box
+{
+	max-width: 350px;
+	margin: 20px auto;
+	border: 1px solid #e1e4e8;
+	overflow-x: visible;
+	
+}
+#search-button,
+#select-button
+{
+	width: 100%;
+}
+	#select-button:hover
+	{
+		cursor: pointer;
+	}
+#school-search-form
+{
+	width: 100%;
+}
+	#school-search-name
+	{
+		width: 100%;
+		height: 30px;
+	}
+#school-select-form
+{
+	width: 100%;
+}
+	#school-select-name
+	{
+		width: 100%;
+		height: 400px;
+	}

@@ -1,26 +1,191 @@
 {% extends "Base.html" %}
 {% load static %}
-
+<!--<head>-->
 	{% block head %}
-	<link type="text/css" rel="stylesheet" href="{% static 'CSS/Base.css' %}"/>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link type="text/css" rel="stylesheet" href="{% static 'CSS/accounts_app/Profile.css' %}"/>
+		<link type="text/css" rel="stylesheet" href="{% static 'CSS/Base.css' %}"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link type="text/css" rel="stylesheet" href="{% static 'CSS/accounts_app/Athlete-Profile.css' %}"/>
+		<link type="text/css" rel="stylesheet" href="{% static 'CSS/accounts_app/Coach-Profile.css' %}"/>
 	{% endblock %}
+<!--</head>-->
+<!--<body>-->
+	<!--<header>-->
+		{% block nav %}
+			{{ block.super }}
+		{% endblock %}
+	<!--</header>-->
+	<!-- <section class="Container">
+		<section class="Main-Content"> -->
+			{% block main %}
+				{% if user.occupation == "A" %}
+				<div class="cta-profile-container">
+					<img class="cta-avatar" src="{{ User_Profile.avatar.url }}"/>
+					<div class="cta-gallery">
+						<button class="cta-gallery-button">FRESHMAN</button>
+						<button class="cta-gallery-button">SOPHMORE</button>
+						<button class="cta-gallery-button">JUNIOR</button>
+						<button class="cta-gallery-button">SENIOR</button>
+						{% for galleryimage in Gallery_Objects %}
+							<img class="cta-gallery-images" src="{{ galleryimage.image.url }}">
+						{% endfor %}
+					</div>
+					<img class="cta-banner" src="{{ User_Profile.banner.url }}">
+					<p id="cta-full-name">{{ Page_Owner }}</p>
 
-	{% block main %}
-	<section class="Container">
-		<section class="Main-Content">
-			<div class="Profile-Container">
-				<img class="Avatar" src="{{ user.userprofile.avatar.url }}"/>
-				<img class="Banner" src="{{ user.userprofile.banner.url }}"/>l
+					<i id="up-arrow"></i>
+					<i id="down-arrow"></i>
+					<div id="cta-table-container">
+					{% for namedSport in Sport_Objects %}
+						{% if namedSport.0.get_sport_name == "Baseball" %}
+							<table class="cta-sport-table" id="Baseball_Table">
+								<tr class="header-row">
+									<th>Year</th>
+									<th>Pos</th>
+									<th>G</th>
+									<th>R</th>
+									<th>RBI</th>
+									<th>SH</th>
+									<th>DH</th>
+									<th>TH</th>
+									<th>HR</th>
+									<th>SB</th>
+									<th>BBB</th>
+									<th>SO</th>
+								</tr>
+							{% for sport in namedSport%}
+								<tr>
+									<td>{{ sport.year }}</td>
+									<td>{{ sport.position }}</td>
+									<td>{{ sport.games }}</td>
+									<td>{{ sport.runs }}</td>
+									<td>{{ sport.runs_batted_in }}</td>
+									<td>{{ sport.single_hits }}</td>
+									<td>{{ sport.double_hits }}</td>
+									<td>{{ sport.tripple_hits }}</td>
+									<td>{{ sport.home_runs }}</td>
+									<td>{{ sport.stolen_bases }}</td>
+									<td>{{ sport.bases_on_ball }}</td>
+									<td>{{ sport.strikeouts }}</td>
+								</tr>
+							{% endfor %}
+							</table>
+						{% endif %}
+						{% if namedSport.0.get_sport_name == "Basketball" %}
+							<table class="cta-sport-table">
+								<tr class="header-row">
+									<th>Yr</th>
+									<th>Pos</th>
+									<th>Dnks</th>
+									<th>2P</th>
+									<th>3P</th>
+									<th>P</th>
+									<th>A</th>
+									<th>Stl</th>
+									<th>TMO</th>
+								</tr>
+								{% for sport in namedSport%}
+									<tr>
+										<td>{{ sport.year}}</td>
+										<td>{{ sport.position }}</td>
+										<td> {{ sport.dunks }}</td>
+										<td> {{ sport.two_pointers }}</td>
+										<td> {{ sport.three_pointers }}</td>
+										<td> {{ sport.points }}</td>
+										<td> {{ sport.assists }}</td>
+										<td> {{ sport.steals }}</td>
+										<td> {{ sport.timeouts }}</td>
+									</tr>
+								{% endfor %}
+							{% endif %}
+							</table>
+						{% endfor %}
+					</div>
+					<div id="cta-activity-feed">
+						<h3 id="activity-feed-header">Activity Feed</h3>
+						<ul>
+							{% for activity in Activity_Objects %}
+								<li class="cta-activity-item">{{activity | safe}}</li>
+								<div id="Line-1-Grid"></div>
+							{% endfor%}
+						</ul>
+					</div>
+					<ul id="cta-suggested-friends">
+						<li><h1>Suggested Athletes</h1></li>
+						{% for friend in Suggested_Athletes %}
+							<li><p><a href="{% url 'Accounts_Namespace:Accounts_View_Profile_Other' slug=friend.username %}">{{friend}}</a></p></li>
+						{% endfor %}
+					</ul>
+					<ul id="cta-friends">
+						<li><h1>Your Bench:</h1></li>
+						{% for friend in Friends %}
+							<li><p><a href="{% url 'Accounts_Namespace:Accounts_View_Profile_Other' slug=friend.username %}">{{friend}}</a></p></li>
+						{% endfor %}
+					</ul>
+				</div>
+				{% endif %}
 
-				<div class="Stats"></div>
-				<div class="Gallery"></div>;
-				<p><span style="font-size: 18px; font-weight: bold; color: #24292e;">{{ user.first_name }} {{ user.last_name }}</span></p>
-			</div>
-		</section>
-	</section>
-	{% endblock %}
 
+
+
+				{% if user.occupation == "C" %}
+					<div class="atc-profile-container">
+						<div id="atc-avatar-container">
+							<img class="atc-banner" src="{{ User_Profile.banner.url }}">
+							<img class="atc-avatar" src="{{ User_Profile.avatar.url }}"/>
+						</div>
+						<div class="toolbar">
+							<ul>
+								<li><a href="#">Your Gallery</a></li>
+								<li><a href="#">Your New Account</a></li>
+								<li><a href="#">Account Complete</a></li>
+								<li><a href="#">{{AccountPercentage.percentage}}Your Recent Activity</a></li>
+							</ul>
+						</div>
+						<div id="atc-table-container">
+						{% for namedSport in Sport_Objects %}
+							{% if namedSport.0.get_sport_name == "Baseball" %}
+								<table class="atc-sport-table" id="Baseball_Table">
+									<tr class="header-row">
+										<th>Year</th>
+										<th>Pos</th>
+										<th>G</th>
+										<th>R</th>
+										<th>RBI</th>
+										<th>SH</th>
+										<th>DH</th>
+										<th>TH</th>
+										<th>HR</th>
+										<th>SB</th>
+										<th>BBB</th>
+										<th>SO</th>
+									</tr>
+								{% for sport in namedSport%}
+									<tr>
+										<td>{{ sport.year }}</td>
+										<td>{{ sport.position }}</td>
+										<td>{{ sport.games }}</td>
+										<td>{{ sport.runs }}</td>
+										<td>{{ sport.runs_batted_in }}</td>
+										<td>{{ sport.single_hits }}</td>
+										<td>{{ sport.double_hits }}</td>
+										<td>{{ sport.tripple_hits }}</td>
+										<td>{{ sport.home_runs }}</td>
+										<td>{{ sport.stolen_bases }}</td>
+										<td>{{ sport.bases_on_ball }}</td>
+										<td>{{ sport.strikeouts }}</td>
+									</tr>
+								{% endfor %}
+								</table>
+							{% endif %}
+						{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+			{% endblock %}
+         <!-- </section>
+	     </section>...
+<!--</body>-->
 	{% block scripts %}
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="{% static 'Scripts/accounts_app/Profile.js' %}"></script>
 	{% endblock %}

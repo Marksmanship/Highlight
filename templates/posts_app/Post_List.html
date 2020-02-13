@@ -1,0 +1,68 @@
+{% extends "Base.html" %}
+{% load static %}
+
+	{% block head %}
+    <link type="text/css" rel="stylesheet" href="{% static 'CSS/posts_app/Post_List.css'%}">
+    <link type="text/css" rel="stylesheet" href="{% static 'CSS/Base.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	{% endblock %}
+
+
+	{% block main %}
+    	<div class="Banner-Wrapper">
+        	<div class="Banner-Background"></div>
+        	<h3 class="Banner-Text">Blog</h3>
+      	</div>
+		<ul class="tile-container">
+			{% if Post_Page %}
+				{% for post in Post_Page %}
+					<li class="tile">
+						<!--<img src="{{ post.thumbnail.url }}"/>-->
+						<div class="tile-image-container">
+							<img class="tile-image" src="{{ post.thumbnail.url}}"/>
+						</div>
+						<div class="tile-info">
+							<p class="tile-date">{{ post.created }}</p>
+							<h3 class="tile-title">{{ post.title }}</h3>
+							<p class="tile-read-more"><a href="{% url 'Posts_Namespace:Posts_Detail' slug=post.slug %}">view article</a></p>
+						</div>
+					</li>
+				{% endfor %}
+			{% endif %}
+		</ul>
+			{% if Post_Page %}
+				{% if Post_Page.has_other_pages %}
+					<ul class="page-container">
+						{% if Post_Page.has_previous %}
+							<li class="page-item">
+								<a href="?page={{Post_Page.previous_page_number}}" class="page-link">&laquo;</a>
+							</li>
+						{% else %}
+							<li class="page-item disabled">
+								<a class="page-link">&laquo;</a>
+							</li>
+						{% endif %}
+						{% for pageInstance in Post_Page.paginator.page_range  %}
+							{% if Post_Page.number == pageInstance %}
+								<li class="page-item active">
+									<a href="" class="page-link">{{pageInstance}}</a>
+							{% else %}
+								<li class="page-item">
+									<a href="?page={{pageInstance}}" class="page-link">{{pageInstance}}</a>
+							{% endif %}
+						{% endfor %}
+						{% if Post_Page.has_next %}
+							<li class="page-item">
+								<a href="?page={{Post_Page.next_page_number}}" class="page-link">&raquo;</a>
+							</li>
+						{% else %}
+							<li class="page-item disabled">
+								<a class="page-link">&raquo;</a>
+							</li>
+						{% endif %}
+					</ul>
+				{% endif %} <!-- Has other pages -->
+			{% else %} <!-- "If there are post objects" counter -->
+				<div><p> No blog posts available.</p></div>
+			{% endif %}
+	{% endblock %}

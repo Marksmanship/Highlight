@@ -1,0 +1,87 @@
+
+.gallery-form
+{
+	display: inline-block;
+}
+.gallery-image-container
+{
+	position: relative;
+	width: 260px;										/* 270px */
+	height: 275px;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	border: 2px groove white;
+}
+.gallery-image-container input[type="file"]
+{
+	height: 85%;
+	width: 100%;
+	visibility: hidden;
+}
+.gallery-image-container label
+{
+	display: block;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 85%;
+	cursor: pointer;
+	text-align: center;
+	font-size: 1.4rem;
+	font-weight: 600;
+	color: white;
+	transition: background-color .30s ease-in-out;
+}
+	.gallery-image-container label:hover
+	{
+		background-color: darkblue;
+		opacity: .3
+	}
+		.gallery-image-container label:hover::before
+		{
+			content: 'Change';
+			position: absolute;
+			top: 45%;
+			left: 0;
+			width: 100%;
+			height: 10%;
+		}
+	.gallery-image-container:hover
+	{
+		background-size: auto 115%;
+	}
+.gallery-image-container a
+{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 15%;
+	text-align: center;
+	padding-top: 2.5%;
+	color: blue;
+}
+.delete-container
+{
+	width: 100%;
+	height: 15%;
+	position: absolute;
+	bottom: 0;
+	background-color: black;
+	opacity: .85;
+	transition: background-color .15s ease-in;
+}
+	.delete-container::before{
+		content:'delete';
+		position: relative;
+		display: block;
+		transform: translateY(50%);
+		width: 100%;
+		text-align: center;
+		color: white;
+		font-weight: 500;
+		cursor: pointer;
+	}
+	.delete-container:hover{
+		background-color: red;
+	}

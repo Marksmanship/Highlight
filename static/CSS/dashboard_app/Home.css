@@ -11,17 +11,22 @@ body
   color: white;
   margin: 0;
 }
-    .Background-Image-Container
+    #background-image-container
 	{
 		position: relative;
-		height: 120%;
-	    width: 120%;
-	    left: -10%;
-	    top: -10%;
-	    background-image: url("../../Images/Background/baseball.jpg");
+		height: 100%;
+	    width: 100%;
 	    background-size: cover;
 	    background-position: center;
 		}
+            .Carousel-Item
+            {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0px;
+                -webkit-transition: margin 2s;
+            }
 			.blur
 			{
 				-webkit-filter: blur(5px);

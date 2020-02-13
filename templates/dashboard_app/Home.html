@@ -1,5 +1,6 @@
 {% extends "Base.html" %}
 {% load static %}
+
 	{% block head %}
 	<link rel="stylesheet" type="text/css" href="{% static 'CSS/dashboard_app/Home.css' %}"/>
 	<link type="text/css" rel="stylesheet" href="{% static 'CSS/Base.css' %}">
@@ -9,7 +10,11 @@
 	{% block main %}
 	<section class="Container">
 		<section class="Main-Content">
-			<div class="Background-Image-Container"></div>
+			<div id="background-image-container">
+				<img class="Carousel-Item" src="{% static 'Images/Background/bike.jpg'%}">
+				<img class="Carousel-Item" src="{% static 'Images/Background/skateboard.jpg'%}">
+			</div>
+			<button id="next-button" onclick="myCarousel.next();" style="position: absolute; z-index:3; top:5px;">next</button>
 			<div class="Banner-Quote-Wrapper">
 				<p class="Banner-Quote">Join the HIGHLIGHTPAGE family and get the</p>
 				<p class="Banner-Quote">exposure needed to earn an atheletic scholarship.</p>
@@ -24,7 +29,7 @@
 					<div class="Tab-Panel" id="tab-1">
 						<p class="Registry-Quote">Your BIG opportunity may be right</p>
 						<p class="Registry-Quote">where you are now.</p>
-						<form class="Registry-Form" action="account/" method="POST">
+						<form class="Registry-Form" action="{% url 'Accounts_Namespace:Accounts_Register' %}" method="POST">
 							{% csrf_token %}
 							<label for="registry-first-name" class="Form-Half">First Name*</label>
 							<label for="registry-last-name" class="Form-Half">Last Name*</label>
@@ -44,10 +49,10 @@
 						</form>
 					</div>
 					<div class="Tab-Panel" id="tab-2">
-						<form class="Login-Form" action="account/login/" method="post">
+						<form class="Login-Form" action="{% url 'Accounts_Namespace:Accounts_Login' %}" method="post">
 							{% csrf_token %}
 							<h2 class="Login-Quote">Welcome Back!</h2>
-								<label class="Form-Full" for="login-username">Username*</span></label>
+								<label class="Form-Full" for="login-username">Username*</label>
 									<input type="text" class="Form-Half" name="login-username" id="login-username">
 								<label class="Form-Full" for="login-password">Password*</label>
 									<input type='password' class="Form-Half" name="login-password" id="login-password" maxlength="16" placeholder='Please enter your password'>
@@ -61,5 +66,6 @@
 	</section>
 	{% endblock %}
 	{% block scripts %}
-	<script type="text/javascript" src="{% static 'Scripts/dashboard_app/Home.js' %}"></script>
+	<script type="text/javascript" src="{% static 'Scripts/dashboard_app/Home.js' %}">
+	</script>
 	{% endblock %}

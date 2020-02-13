@@ -13,3 +13,5 @@ def Home(request):
 	return render(request, template_name, {'form': form_class})
 def Sports(request):
 	pass
+def Dashboard(request):
+	return render(request, "dashboard_app/Dashboard.html")

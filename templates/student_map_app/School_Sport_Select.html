@@ -1,0 +1,14 @@
+{% extends "Base.html "%}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'CSS/student_map_app/School_Sport_Select.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'CSS/Base.css' %}"/>
+{% endblock %}
+{% block main %}
+  <form class="Sport-Select-Form" action="" method="POST">
+  {% csrf_token %}
+    <label for="sport-select-name"></label>
+    {{ sportForm }}
+    <input type="submit" value="Confirm" name="select-button" id="select-button"/>
+  </form>
+{% endblock %}

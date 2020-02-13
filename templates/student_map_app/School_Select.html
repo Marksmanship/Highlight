@@ -1,14 +1,27 @@
 {% extends "Base.html "%}
 {% load static %}
 {% block head %}
-  <link rel="stylesheet" type="text/css" href="{% static 'CSS/student_map_app/School_Landing.css' %}"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'CSS/student_map_app/School_Select.css' %}"/>
   <link rel="stylesheet" type="text/css" href="{% static 'CSS/Base.css' %}"/>
+
 {% endblock %}
 {% block main %}
-  <form class="School-Select-Form" action="" method="POST">
-    <label for="dropdown-choicefield-id">Select your school</label>
-    {% csrf_token %}
-    {{ form.school_options }}
-    <input type="submit" value="Confirm"/>
-  </form>
+    <div class="affiliation-box">
+        <form id="school-search-form" action='' method="POST">
+            <!--<label for="search-charfield-id"></label>-->
+            {{ Search_Form }}
+            {% csrf_token %}
+            <input type="submit" value="Search" name="search-button" id="search-button"/>
+        </form>
+        <form class="school-select-form" action="" method="POST">
+            <!--<label for="dropdown-choicefield-id">Select your school</label>-->
+            {{ Select_Form.school_options }}
+            {% csrf_token %}
+            <input type="submit" value="Confirm" name="select-button" id="select-button"/>
+        </form>
+     </div>
+{% endblock %}
+{% block scripts %}
+<script src = "https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="{% static 'Scripts/student_map_app/main.js' %}"></script>
 {% endblock %}

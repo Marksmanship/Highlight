@@ -1,0 +1,85 @@
+*
+{
+	margin: 0;
+	padding: 0;
+}
+#dashboard-container
+{
+	width: 85%;
+	margin: 0 auto;
+
+}
+#dashboard-wrapper
+{
+	display: grid;
+	grid-template-columns: 25% 50% 25%;
+	grid-template-rows: auto;
+	grid-auto-flow: row;
+	grid-auto-rows: auto;
+	grid-template-areas:
+	 	"highlight-reel scholarships newest-posts"
+		"highlight-reel activity-feed newest-posts"
+		".............. ............. contacts";	/* Throw in a negative margin */
+	grid-column-gap: 1.2%;
+	grid-row-gap: 2%;
+	margin: 0 auto;
+	justify-items: center;
+	margin-top: 10px;
+}
+
+#scholarships,
+#activity-feed,
+#newest-posts,
+#contacts
+{
+	background-color: white;
+	-webkit-box-shadow: 0px 2px 14px -4px rgba(0,0,0,0.65);
+}
+#scholarships
+{
+	grid-area: scholarships;
+	height: 10vh;
+	width: 100%;
+}
+#contacts
+{
+	grid-area: contacts;
+	height: 65vh;
+	width: 80%;
+	justify-self: start;
+}
+#highlight-reel
+{
+	grid-area: highlight-reel;
+	justify-self: right;
+	height: 50vh;
+	width: 80%;
+	border-right: 1px solid #e1e4e8;
+	border-bottom: 1px solid #e1e4e8;
+}
+	#highlight-reel::before
+	{
+		content:'Highlight Reel';
+		display:block;
+		height: 25px;
+		width: 100%;
+		-webkit-box-shadow: 0px 2px 14px -4px rgba(0,0,0,0.65);
+		background-color: #6a7382;
+		color: #0E2B5B;
+		text-align: center;
+		line-height: 25px;
+		font-weight: 800;
+	}
+#activity-feed
+{
+	grid-area: activity-feed;
+	height: 100vh;
+	width: 100%;
+}
+#newest-posts
+{
+	grid-area: newest-posts;
+	justify-self: start;
+	height: 20vh;
+	width: 75%;
+}

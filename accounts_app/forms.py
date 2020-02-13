@@ -1,10 +1,10 @@
 from django import forms
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm	# Django pre-populated form that accepts a meta model
 from django.contrib.auth import get_user_model							# Import our customized user model
-from .models import UserProfile
-
+from .models import UserProfile, Gallery
 # Declare our custom User model
-CustomUser = get_user_model()
+User = get_user_model()
 
 # RegistrationForm inherits UserCreationForm which contains the Username, Password1, Password2 fields
 # UserCreationForm inherits ModelForm and its Meta() inherits the User Model (table), so it makes records on the User table on each save
@@ -12,7 +12,7 @@ class RegistrationForm(UserCreationForm):
 	email = forms.EmailField(max_length=70, required=True)
 	class Meta:
 		# Also populate this form with User Model )
-		model = CustomUser
+		model = User
 			# first_name,
 			# last_name,
 			# password,
@@ -53,9 +53,16 @@ class RegistrationForm(UserCreationForm):
 class ProfileEditForm(UserChangeForm):
 
 	class Meta:
-		model = CustomUser
+		model = User
 		fields = [
 			'email',
 			'first_name',
-			'last_name'
+			'last_name',
+			'password',		# If we left this out, this required field would throw an error
 		]
+
+class GalleryForm(ModelForm):
+	image = forms.ImageField(widget=forms.FileInput) # This is how you change from default ClearableFileInput
+	class Meta:
+		model = Gallery
+		fields = ('image',)

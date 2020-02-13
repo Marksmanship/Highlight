@@ -1,13 +1,39 @@
 <!--DOCTYPE html -->
-<html>
+{% extends "Base.html" %}
+{% load static %}
 
-	<body>
-		<h2 style="margin: 0 auto;">{{ post_objects.title }}</h2><br/>
-		<p style="font-size: 20px"> This is the content of the blog post: {{ post_objects.content }}</p><br/>
-		<img src="{{ post_objects.thumbnail.url }}" style="margin: 10px auto 10px auto; display:block;"/>
-		{{ post_objects.timestamp }}<br/>
-		{{ post_objects.updated }}<br/>
-		{{ post_objects.id }}<br/>
-	</body>
+	{% block head %}
+    <link type="text/css" rel="stylesheet" href="{% static 'CSS/posts_app/Post_Detail.css'%}">
+    <link type="text/css" rel="stylesheet" href="{% static 'CSS/Base.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	{% endblock %}
+	{% block main %}
+		<div id="blog-container">
+			<img id="blog-background" src="{{ Post_Object.thumbnail.url }}"/>
+			<h2 id="blog-header" style="margin: 0 auto;">{{ Post_Object.title }}</h2><br/>
+			<p id="blog-content" style="font-size: 20px"> This is the content of the blog post: {{ Post_Object.body }}</p><br/>
 
-</html>
+			<div id="blog-post-like"></div>
+			<div id="blog-post-favorite"></div>
+		</div>
+	{% endblock %}
+
+{% block scripts %}
+	<script stype="text/javascript">
+		// We want this to be accessible from outside the template, so we don't use
+		// (function(){ getPostId()... })
+		function getPostId()
+		{
+			return "{{ Post_Object.id }}"
+		}
+		"{% if Like_Status == 'Liked' %}"
+			blogPostLike = document.getElementById("blog-post-like");
+			addOrRemove = "liked";
+			blogPostLike.className += (" " + addOrRemove);
+
+		"{% endif %}"
+		// If the like status is disliked or never-liked, defaults to the heart's css.
+	</script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="{% static 'Scripts/posts_app/main.js' %}"></script>
+{% endblock %}

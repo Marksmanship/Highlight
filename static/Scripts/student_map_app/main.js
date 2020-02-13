@@ -1,32 +1,46 @@
 $(document).ready(function()
 {
-	$('#Search-Form').on('submit', function(event)
+	
+	$('#school-search-form').on('submit', function(event)
 	{
 		event.preventDefault();
-		console.log("FORM SUBMITTED!");
-		Search_For_School();
-	});
-
-	function Search_For_School()
-	{
-		console.log("The user searched for: " + $('#school-search-box').val());
+		var searchFormData = $('#school-search-form').serializeArray();
 		$.ajax(
+		{
+			type: "POST", 			// If we don't specify type, it resorts to get
+			// url: ...  			// If we don't specify url, it resorts to current URL
+			data: searchFormData,
+			dataType: 'html',		// 'text/html'
+			success: function(response)
 			{
-				url: "",
-				type: "POST",
-				data: { searchString: $('#school-search-box').val() },
+				var result = $('<div />').append(response).find('#school-select-name').html();
+				$('#school-select-name').html(result);
 
-				success: function(json)
-				{
-					$('#school-search-box').val('');
-					console.log(json);
-					console.log("success");
-				},
-				error: function()
-				{
-					console.log('ERROR');
-				}
-			});
-		)
-	}
+				// $('#school-select-name').removeAttr('multiple');
+			},
+			error: function(response)
+			{
+				console.log("pepe SCREEEEECH!!!!");
+			},
+		});
+	});
+	$('#school-select-form').on('submit', function(event)
+	{
+		event.preventDefault();
+		var selectFormData = $('#school-select-form').serializeArray(); // Stored as an array of javascript objects
+		$.ajax(
+		{
+			type: "POST",
+			data: selectFormData,
+			success: function(resposne)
+			{
+				$('#school-select-name').val('');
+				console.log(response);
+			},
+			error: function()
+			{
+				console.log('ERROR');
+			}
+		});
+	});
 });
